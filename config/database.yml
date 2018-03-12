@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: the-free-agency_production
-  username: the-free-agency
-  password: <%= ENV['THE-FREE-AGENCY_DATABASE_PASSWORD'] %>
