@@ -26,7 +26,14 @@
     "react-addons-test-utils": "~15.6.2"
   },
   "scripts": {
-    "start": "./bin/webpack-dev-server",
-    "test": "node_modules/.bin/karma start karma.conf.js"
-  }
+    "heroku-postbuild": "NODE_ENV=production npm run webpack -- -p",
+    "test": "node_modules/.bin/karma start ./react/karma.conf.js",
+    "start": "npm run webpack -- --watch",
+    "webpack": "node_modules/.bin/webpack --config ./react/webpack.config.js"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "author": "",
+  "license": "ISC"
 }
