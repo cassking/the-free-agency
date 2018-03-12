@@ -26,10 +26,9 @@
     "react-addons-test-utils": "~15.6.2"
   },
   "scripts": {
-    "heroku-postbuild": "NODE_ENV=production npm run webpack -- -p",
     "test": "node_modules/.bin/karma start karma.conf.js",
-    "start": "./bin/webpack-dev-server",
-    "webpack": "node_modules/.bin/webpack --config ./react/webpack.config.js"
+    "start": "./bin/webpack-dev-server"
+
   },
   "engines": {
     "node": ">=6.0.0",
