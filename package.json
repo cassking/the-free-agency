@@ -27,8 +27,8 @@
   },
   "scripts": {
     "heroku-postbuild": "NODE_ENV=production npm run webpack -- -p",
-    "test": "node_modules/.bin/karma start ./react/karma.conf.js",
-    "start": "npm run webpack -- --watch",
+    "test": "node_modules/.bin/karma start karma.conf.js",
+    "start": "./bin/webpack-dev-server",
     "webpack": "node_modules/.bin/webpack --config ./react/webpack.config.js"
   },
   "engines": {
