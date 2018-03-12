@@ -1,7 +1,7 @@
 # The Free Agency Project
 
 This is a review site for NBA Free Agents. Users will be able to create accounts, add comments on available NBA Free Agents. Administrators will be able to manage users, delete comments and manage users and add additional features.
-#Authors
+# Authors
 * Ian Highsmith
 * Cassandra King
 * Jacob Merrell
