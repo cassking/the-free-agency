@@ -1,24 +1,13 @@
-# README
+# The Free Agency Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a review site for NBA Free Agents. Users will be able to create accounts, add comments on available NBA Free Agents. Administrators will be able to manage users, delete comments and manage users and add additional features.
+# Authors
+* Ian Highsmith
+* Cassandra King
+* Jacob Merrell
+* Eric Ruan
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Build Status](https://codeship.com/projects/eba289e0-084f-0136-babb-6685fd843c27/status?branch=master)
+[![Code Climate](https://codeclimate.com/github/cassking/the-free-agency/badges/gpa.svg)](https://codeclimate.com/github/cassking/the-free-agency)
+[![Coverage Status](https://coveralls.io/repos/github/cassking/the-free-agency/badge.svg?branch=master)](https://coveralls.io/github/cassking/the-free-agency?branch=master)
