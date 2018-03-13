@@ -10,9 +10,9 @@ feature 'admin visits dashboard', %(
     user = FactoryBot.create(:user)
     visit '/'
     click_on 'Sign In'
-    fill_in "Email", with: admin.email
-    fill_in "Password", with: admin.password
-    click_on "Log in"
+    fill_in 'Email', with: admin.email
+    fill_in 'Password', with: admin.password
+    click_on 'Log in'
     visit dashboard_index_path
     expect(page).to have_content(user.username)
     expect(page).to have_content(user.email)
