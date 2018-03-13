@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'user signs in', %Q{
+feature 'user signs in', %(
   As a signed up user
   I want to sign in
   So that I can regain access to my account
-} do
+) do
   scenario 'specify valid credentials' do
     user = FactoryBot.create(:user)
 
