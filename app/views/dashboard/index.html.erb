@@ -1,0 +1,9 @@
+<h1>Admin Dashboard</h1>
+<ul>
+  <% @users.each do | user | %>
+  <% if !user.admin? %>
+    <li> <%= user.username %>:<%= user.email %></li>
+      <%= link_to 'Destroy', user_registration_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  <%end%>
+</ul>

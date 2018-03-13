@@ -6,4 +6,8 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6}
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+   def admin?
+     role == "admin"
+   end
 end
