@@ -27,8 +27,8 @@ feature 'admin visits dashboard', %Q{
     fill_in "Password", with: admin.password
     click_on "Log in"
     visit dashboard_index_path
-    click_on "Destroy"
-    click_on "OK"
-    expect(page).to have_path(dashboard_index_path)
+    click_on('Destroy')
+    expect(page).to have_content("Admin Dashboard")
+    expect(page).to have_content("User deleted")
   end
 end
