@@ -17,4 +17,18 @@ feature 'admin visits dashboard', %Q{
     expect(page).to have_content(user.username)
     expect(page).to have_content(user.email)
   end
+
+  scenario 'admin deletes user' do
+    admin = FactoryBot.create(:user, role: "admin")
+    user = FactoryBot.create(:user)
+    visit '/'
+    click_on 'Sign In'
+    fill_in "Email", with: admin.email
+    fill_in "Password", with: admin.password
+    click_on "Log in"
+    visit dashboard_index_path
+    click_on "Destroy"
+    click_on "OK"
+    expect(page).to have_path(dashboard_index_path)
+  end
 end
