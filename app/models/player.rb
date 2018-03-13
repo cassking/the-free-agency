@@ -1,4 +1,4 @@
-# Include default player modules. Others available are:
+# Defines the player modules. Others available are:
 # :birth_city, :birth_country, :team_id
 class Player < ApplicationRecord
   has_many :stats
