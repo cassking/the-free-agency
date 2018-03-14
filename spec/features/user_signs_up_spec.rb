@@ -19,9 +19,10 @@ feature 'user registers', %(
     fill_in 'Username', with: 'joew'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
-
+    attach_file 'Avatar', "#{Rails.root}/app/assets/images/default.jpg"
     click_button 'Sign up'
 
+    expect(User.last.avatar.present?).to be(true)
     expect(page).to have_content('Welcome! You have signed up successfully.')
     expect(page).to have_content('Sign Out')
     expect(User.last.role).to eq('member')

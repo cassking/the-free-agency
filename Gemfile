@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
 ruby "2.3.3"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -28,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'dotenv-rails', groups: [:development, :test]
 group :development, :test do
   gem 'coveralls', require: false
 end
@@ -46,10 +45,13 @@ gem 'pry-rails', group: [:development, :test]
 gem 'jquery-rails'
 gem 'rspec-rails', group: [:development, :test]
 gem 'capybara', group: [:development, :test]
+gem 'carrierwave', '~> 1.0'
 gem 'launchy', group: [:development, :test]
 gem 'factory_bot', group: [:development, :test]
 gem 'valid_attribute', group: [:development, :test]
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
+gem 'fog'
+gem 'fog-aws'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'

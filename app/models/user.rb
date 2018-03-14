@@ -5,9 +5,11 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, length: { minimum: 6 }
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :avatar, AvatarUploader
 
   def admin?
     role == 'admin'
   end
+
 end
