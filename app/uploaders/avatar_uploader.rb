@@ -5,6 +5,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "assets/default.jpg"
+    'assets/default.jpg'
   end
 end

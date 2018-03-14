@@ -19,7 +19,7 @@ feature 'user registers', %Q{
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     attach_file 'Avatar',
-     "#{Rails.root}/app/assets/images/default.jpg"
+      "#{Rails.root}/app/assets/images/default.jpg"
     click_button 'Sign up'
 
     expect(User.last.avatar.present?).to be(true)
