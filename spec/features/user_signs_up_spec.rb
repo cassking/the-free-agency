@@ -18,9 +18,11 @@ feature 'user registers', %Q{
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
-
+    attach_file 'Avatar',
+     "#{Rails.root}/app/assets/images/default.jpg"
     click_button 'Sign up'
 
+    expect(User.last.avatar.present?).to be(true)
     expect(page).to have_content('Welcome! You have signed up successfully.')
     expect(page).to have_content('Sign Out')
   end
