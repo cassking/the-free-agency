@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-feature 'user registers', %Q{
+feature 'user registers', %(
   As a visitor
   I want to register
   So that I can create an account
-} do
+) do
 
   # Acceptance Criteria:
   # * I must specify a valid email address,
@@ -16,13 +16,16 @@ feature 'user registers', %Q{
     visit new_user_registration_path
 
     fill_in 'Email', with: 'john@example.com'
+    fill_in 'Username', with: 'joew'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
-
+    attach_file 'Avatar', "#{Rails.root}/app/assets/images/default.jpg"
     click_button 'Sign up'
 
+    expect(User.last.avatar.present?).to be(true)
     expect(page).to have_content('Welcome! You have signed up successfully.')
     expect(page).to have_content('Sign Out')
+    expect(User.last.role).to eq('member')
   end
 
   scenario 'provide invalid registration information' do

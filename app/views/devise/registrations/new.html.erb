@@ -7,6 +7,10 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autocomplete: "off" %>
+  </div>
 
   <div class="field">
     <%= f.label :password %>
@@ -20,6 +24,11 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+<div class="avatar">
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar %>
+</div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

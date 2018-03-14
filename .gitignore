@@ -24,4 +24,9 @@
 yarn-debug.log*
 .yarn-integrity
 .env
+<<<<<<< HEAD
+=======
+~/.fog
+/config/initializers/carrierwave.rb
+>>>>>>> master
 package-lock.json
