@@ -1,4 +1,3 @@
-source 'https://rubygems.org'
 ruby "2.3.3"
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -54,3 +53,5 @@ gem 'devise'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'
 gem 'carrierwave', '~> 1.0'
+gem 'fog-aws'
+gem 'fog'
