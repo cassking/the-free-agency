@@ -28,6 +28,7 @@ class PlayerContainer extends Component {
           id={player.id}
           first_name={player.first_name}
           last_name={player.last_name}
+          avatar_url={player.avatar_url}
         />
       )
     })
