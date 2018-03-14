@@ -39,6 +39,7 @@
   <%= yield %>
 
   <%= javascript_include_tag 'application' %>
+  <%= javascript_pack_tag    'application' %>
   <%= content_for :extra_footer do %>
   <script type="text/javascript">
     var widget = new Something.Widget('foo');
