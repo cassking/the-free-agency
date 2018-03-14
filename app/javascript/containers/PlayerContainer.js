@@ -10,6 +10,16 @@ class PlayerContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    fetch('/api/v1/players')
+    .then(response => {
+      let parsed = response.json()
+      return parsed
+    }).then(players => {
+      this.setState({ players: players})
+    })
+  }
+
   render() {
     let players = this.state.players.map(player => {
       return(
@@ -23,7 +33,7 @@ class PlayerContainer extends Component {
     })
     return(
       <div>
-        <h1>Hi.</h1>
+        {players}
       </div>
     )
   }
