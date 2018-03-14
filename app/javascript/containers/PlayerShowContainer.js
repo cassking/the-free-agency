@@ -11,7 +11,6 @@ class PlayerShowContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('hi')
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}`)
     .then(response => {
@@ -28,6 +27,8 @@ class PlayerShowContainer extends Component {
         key={this.state.player.id}
         id={this.state.player.id}
         first_name={this.state.player.first_name}
+        last_name={this.state.player.last_name}
+        avatar_url={this.state.player.avatar_url}
       />
     )
   }
