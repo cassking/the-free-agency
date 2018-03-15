@@ -49,9 +49,10 @@ gem 'carrierwave', '~> 1.0'
 gem 'launchy', group: [:development, :test]
 gem 'factory_bot', group: [:development, :test]
 gem 'valid_attribute', group: [:development, :test]
-gem 'shoulda-matchers', group: [:development, :test], require: false
+gem 'shoulda-matchers', '~> 3.0', group: [:development, :test], require: false
 gem 'devise'
 gem 'fog'
 gem 'fog-aws'
 gem 'foundation-rails', '~> 5.0'
+gem 'rails-controller-testing', group: [:development, :test]
 gem 'webpacker', '~> 3.3'

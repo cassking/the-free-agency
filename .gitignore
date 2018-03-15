@@ -27,3 +27,4 @@ yarn-debug.log*
 ~/.fog
 /config/initializers/carrierwave.rb
 package-lock.json
+/public/uploads
