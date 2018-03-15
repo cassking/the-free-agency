@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::PlayersController, type: :controller do
+RSpec.describe Api::V1::TeamsController, type: :controller do
   let!(:team1) {
     Team.create!(
       name: 'team1',
@@ -40,52 +40,25 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
       team_id: team1.id
     )
   }
-  let!(:user1) {
-    User.create(
-      email: 'pieday@yahoo.com',
-      username: 'ilovepie',
-      password: 'password'
-    )
-  }
-  let!(:comment1) {
-    Comment.create(
-      user_id: user1.id,
-      player_id: kevin_durant.id,
-      body: 'This is a comment on Kevin Durant.'
-    )
-  }
   describe 'GET#index' do
-    it 'should return a list of all the players' do
+    it 'should return a list of all the teams' do
       get :index
       returned_json = JSON.parse(response.body)
-
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
-
-      expect(returned_json.length).to eq 2
-      expect(returned_json[0]['first_name']).to eq 'James'
-      expect(returned_json[0]['last_name']).to eq 'Harden'
-
-      expect(returned_json[1]['height']).to eq "6'9"
-      expect(returned_json[1]['weight']).to eq '240'
+      expect(returned_json.length).to eq 1
+      expect(returned_json[0]['name']).to eq 'team1'
+      expect(returned_json[0]['ranking']).to eq '1'
     end
   end
   describe 'GET#show' do
-    it 'user visit player show page should the player information' do
-      get :show, params: { id: kevin_durant.id }
+    it 'user visit team show page should list the players' do
+      get :show, params: { id: team1.id }
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
-      expect(returned_json['player']['first_name']).to eq 'Kevin'
-      expect(returned_json['player']['position']).to eq 'SF'
-    end
-    it 'user visit player show page should return a list of all the comments' do
-      get :show, params: { id: kevin_durant.id }
-      returned_json = JSON.parse(response.body)
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json')
-      expect(returned_json['comments'].length).to eq 1
-      expect(returned_json['comments'][0]['body']).to eq 'This is a comment on Kevin Durant.'
+      expect(returned_json['players'][0]['first_name']).to eq 'James'
+      expect(returned_json['team']['name']).to eq 'team1'
     end
   end
 end
