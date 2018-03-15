@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::CommentsController, type: :controller do
+RSpec.describe Api::V1::PlayersController, type: :controller do
   let!(:player1) { Player.create(
     first_name: 'Kevin',
     last_name: 'Durant',
@@ -26,9 +26,10 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
     )
   }
 
-  describe 'GET#index' do
-    it 'should return a list of all the comments' do
-      get :index
+  describe "GET#show" do
+    it 'user visit player show page should return a list of all the comments' do
+
+      get api_v1_player_path(player1)
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
