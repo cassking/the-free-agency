@@ -1,12 +1,14 @@
 class Api::V1::PlayersController < ApplicationController
   def index
-    binding.pry
+
     render json: Player.all
   end
 
   def show
-    render json: Player.find(params[:id])
-    render json: Comment.where(player_id: params[:id])
+
+    @player= Player.find(params[:id])
+    @comments = Comment.where(player_id: params[:id])
+    render json: {:player => @player, :comments => @comments }
   end
-  
+
 end

@@ -28,13 +28,12 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
 
   describe "GET#show" do
     it 'user visit player show page should return a list of all the comments' do
-
-      get api_v1_player_path(player1)
+      get :show, params: { id: player1.id }
       returned_json = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
-      expect(returned_json.length).to eq 1
-      expect(returned_json[0]['body']).to eq 'This is a comment on Kevin Durant.'
+      expect(returned_json["comments"].length).to eq 1
+      expect(returned_json["comments"][0]['body']).to eq 'This is a comment on Kevin Durant.'
     end
   end
 end
