@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const PlayerTile = props => {
-  console.log('hello tile')
   return(
     <div className="player">
       <Link to={`/players/${props.id}`}>

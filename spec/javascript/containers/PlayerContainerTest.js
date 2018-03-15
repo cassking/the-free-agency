@@ -8,8 +8,7 @@ describe('PlayerContainer', () => {
     player: [{
       first_name: 'James',
       last_name: 'Harden',
-      avatar_url: 'https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000&cropX1=1335&cropX2=3965&cropY1=104&cropY2=2735',
-
+      avatar_url: 'https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000&cropX1=1335&cropX2=3965&cropY1=104&cropY2=2735'
     }]
   }
   beforeEach(() => {
@@ -22,9 +21,8 @@ describe('PlayerContainer', () => {
       });
       return Promise.resolve(response);
     });
-
+  
     wrapper = mount(<PlayerContainer />);
-
   });
 
   fit('should have the specified intial state', () => {
