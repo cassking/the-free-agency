@@ -21,24 +21,17 @@ describe('PlayerContainer', () => {
       });
       return Promise.resolve(response);
     });
-  
+
     wrapper = mount(<PlayerContainer />);
   });
 
-  fit('should have the specified intial state', () => {
+  it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
        players: []
      })
   });
 
-  it('should render a h4 tag', (done) => {
-     setTimeout(() => {
-       expect(wrapper.find('h4')).toBePresent();
-       done();
-     }, 0)
-   });
-
-   fit('should render the PlayerTile with different props, when players is not an empty array', (done) => {
+   it('should render the PlayerTile with different props, when players is not an empty array', (done) => {
    setTimeout(() => {
      expect(wrapper.findWhere(node => node.hasClass('player')))
      expect(wrapper.findWhere(node => node.type() === 'div'))

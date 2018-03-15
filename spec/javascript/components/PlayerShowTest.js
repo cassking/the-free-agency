@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PlayerShow from '../../../app/javascript/components/PlayerShow';
 
