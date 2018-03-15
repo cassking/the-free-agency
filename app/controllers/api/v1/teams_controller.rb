@@ -4,7 +4,7 @@ class Api::V1::TeamsController < ApplicationController
   end
 
   def show
-    @team= Team.find(params[:id])
+    @team = Team.find(params[:id])
     @players = Player.where(team_id: params[:id])
     render json: { team: @team, players: @players }
   end
