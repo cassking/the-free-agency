@@ -17,7 +17,7 @@ class PlayerShowContainer extends Component {
       let parsed = response.json()
       return parsed
     }).then(body => {
-      this.setState({ player: body })
+      this.setState({ player: body['player'] })
     })
   }
 

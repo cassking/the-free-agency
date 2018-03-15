@@ -44,4 +44,14 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
       expect(returned_json[1]['weight']).to eq '240'
     end
   end
+  describe 'GET#show' do
+    it 'user visit player show page should the player information' do
+      get :show, params: { id: kevin_durant.id }
+      returned_json = JSON.parse(response.body)
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq('application/json')
+      expect(returned_json['player']['first_name']).to eq 'Kevin'
+      expect(returned_json['player']['position']).to eq 'SF'
+    end
+  end
 end
