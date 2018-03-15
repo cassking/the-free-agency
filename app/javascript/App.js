@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRoute, Router, browserHistory } from 'react-router'
 import PlayerContainer from './containers/PlayerContainer'
 import PlayerShowContainer from './containers/PlayerShowContainer'
-
+import 'whatwg-fetch';
 
 const App = props => {
   return (
