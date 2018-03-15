@@ -27,7 +27,20 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
       position: 'SF'
     )
   }
-
+  let!(:user1) {
+    User.create(
+      email: 'pieday@yahoo.com',
+      username: 'ilovepie',
+      password: 'password'
+    )
+  }
+  let!(:comment1) {
+    Comment.create(
+      user_id: user1.id,
+      player_id: kevin_durant.id,
+      body: 'This is a comment on Kevin Durant.'
+    )
+  }
   describe 'GET#index' do
     it 'should return a list of all the players' do
       get :index
@@ -52,6 +65,14 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
       expect(response.content_type).to eq('application/json')
       expect(returned_json['player']['first_name']).to eq 'Kevin'
       expect(returned_json['player']['position']).to eq 'SF'
+    end
+    it 'user visit player show page should return a list of all the comments' do
+      get :show, params: { id: kevin_durant.id }
+      returned_json = JSON.parse(response.body)
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq('application/json')
+      expect(returned_json['comments'].length).to eq 1
+      expect(returned_json['comments'][0]['body']).to eq 'This is a comment on Kevin Durant.'
     end
   end
 end
