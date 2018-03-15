@@ -8,4 +8,5 @@ class Api::V1::PlayersController < ApplicationController
     render json: Player.find(params[:id])
     render json: Comment.where(player_id: params[:id])
   end
+  
 end
