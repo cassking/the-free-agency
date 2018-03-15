@@ -3,6 +3,7 @@ import { Route, IndexRoute, Router, browserHistory } from 'react-router'
 import PlayerContainer from './containers/PlayerContainer'
 import PlayerShowContainer from './containers/PlayerShowContainer'
 import TeamContainer from './containers/TeamContainer'
+import TeamShowContainer from './containers/TeamShowContainer'
 import Layout from './components/Layout'
 
 const App = props => {
@@ -12,7 +13,7 @@ const App = props => {
         <IndexRoute component={PlayerContainer} />
         <Route path="players/:id" component={PlayerShowContainer} />
         <Route path="/teams" component={TeamContainer} />
-        {/* <Route path="/teams/:id" component={TeamShowContainer} /> */}
+        <Route path="/teams/:id" component={TeamShowContainer} />
       </Route>
     </Router>
   )

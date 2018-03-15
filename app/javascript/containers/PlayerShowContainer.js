@@ -10,7 +10,7 @@ class PlayerShowContainer extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}`)
     .then(response => {
