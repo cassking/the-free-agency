@@ -8,6 +8,28 @@
 
 Player.delete_all
 Stat.delete_all
+Team.delete_all
+User.delete_all
+
+team1 = Team.create!(
+  name: 'team1',
+  city: 'that place',
+  state: 'that state',
+  logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
+  win: '100',
+  loss: '0',
+  ranking: '1'
+)
+
+team2 = Team.create!(
+  name: 'team2',
+  city: 'that place',
+  state: 'that state',
+  logo_url: 'http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/phi.png',
+  win: '100',
+  loss: '0',
+  ranking: '1'
+)
 
 james_harden = Player.create(
   first_name: "James",
@@ -18,7 +40,8 @@ james_harden = Player.create(
   weight: "220",
   birth_city: "Los Angeles, CA",
   birth_country: "USA",
-  position: "SG"
+  position: "SG",
+  team_id: team1.id
 )
 
 Stat.create(
@@ -37,7 +60,8 @@ kevin_durant = Player.create(
   weight: "240",
   birth_city: "Washington, D.C.",
   birth_country: "USA",
-  position: "SF"
+  position: "SF",
+  team_id: team1.id
 )
 
 Stat.create(
@@ -46,7 +70,6 @@ Stat.create(
   apg: "9.4",
   rpg: "5"
 )
-User.delete_all
 
 u1 = User.create!(username: "u1",email: "u1@gmail.com", password: "pw1234")
 u2 = User.create!(username: "u2",email: "u2@gmail.com", password: "pw1234")
