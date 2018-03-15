@@ -4,6 +4,7 @@ class Player < ApplicationRecord
   has_many :stats
   has_many :comments
   has_many :users, through: :comments
+  belongs_to :team
 
   validates_presence_of :first_name, :last_name, :avatar_url
   validates_presence_of :age, :height, :weight, :position
