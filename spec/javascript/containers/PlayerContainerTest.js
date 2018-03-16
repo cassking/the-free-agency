@@ -1,4 +1,3 @@
-import React from 'react';
 import PlayerContainer from '../../../app/javascript/containers/PlayerContainer';
 import PlayerTile from '../../../app/javascript/components/PlayerTile';
 
@@ -21,7 +20,6 @@ describe('PlayerContainer', () => {
       });
       return Promise.resolve(response);
     });
-
     wrapper = mount(<PlayerContainer />);
   });
 
@@ -31,11 +29,15 @@ describe('PlayerContainer', () => {
      })
   });
 
-   it('should render the PlayerTile with different props, when players is not an empty array', (done) => {
-   setTimeout(() => {
-     expect(wrapper.findWhere(node => node.hasClass('player')))
-     expect(wrapper.findWhere(node => node.type() === 'div'))
-     done();
-   }, 0)
- });
+  it('should render an PlayerTile Component', () => {
+    wrapper.setState({players: [{"id":3,"first_name":"James","last_name":"Harden","avatar_url":"https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000\u0026cropX1=1335\u0026cropX2=3965\u0026cropY1=104\u0026cropY2=2735","age":"28","height":"6'5","weight":"220","birth_city":"Los Angeles, CA","birth_country":"USA","position":"SG","twitter":null,"team_id":1,"created_at":"2018-03-16T13:44:14.516Z","updated_at":"2018-03-16T13:44:14.516Z"}
+  ]})
+    expect(wrapper.find(PlayerTile)).toBePresent();
+  });
+  it('should not render an PlayerTile Component', () => {
+    wrapper.setState({players: []})
+    expect(wrapper.find(PlayerTile)).not.toBePresent();
+  });
+
+
 });
