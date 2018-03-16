@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PlayerShow from '../components/PlayerShow';
 import CommentTile from '../components/CommentTile';
-
+import StatsTile from '../components/StatsTile'
 
 class PlayerShowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       player: {},
-      comments: []
+      comments: [],
+      stat: {}
     }
   }
 
@@ -21,7 +22,8 @@ class PlayerShowContainer extends Component {
     }).then(body => {
       this.setState({
         player: body['player'],
-        comments: body['comments']
+        comments: body['comments'],
+        stat: body['stat']
       })
     })
   }
@@ -45,6 +47,13 @@ class PlayerShowContainer extends Component {
         first_name={this.state.player.first_name}
         last_name={this.state.player.last_name}
         avatar_url={this.state.player.avatar_url}
+      />
+      <StatsTile
+        id={this.state.stat.id}
+        key={this.state.player.last_name+this.state.stat.ppg+this.state.stat.apg+this.state.stat.rpg}
+        ppg={this.state.stat.ppg}
+        apg={this.state.stat.apg}
+        rpg={this.state.stat.rpg}
       />
       <div className='comments'>
         {comments}
