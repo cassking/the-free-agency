@@ -38,6 +38,4 @@ describe('PlayerContainer', () => {
     wrapper.setState({players: []})
     expect(wrapper.find(PlayerTile)).not.toBePresent();
   });
-
-
 });
