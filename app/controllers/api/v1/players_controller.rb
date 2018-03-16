@@ -6,6 +6,7 @@ class Api::V1::PlayersController < ApplicationController
   def show
     @player= Player.find(params[:id])
     @comments = Comment.where(player_id: params[:id])
-    render json: { player: @player, comments: @comments }
+    @c = @comments.map {|comment| [comment, comment.user.username] }
+    render json: { player: @player, comments: @c}
   end
 end

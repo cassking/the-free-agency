@@ -8,7 +8,7 @@ class PlayerShowContainer extends Component {
     super(props);
     this.state = {
       player: {},
-      comments:[]
+      comments: []
     }
   }
 
@@ -30,11 +30,10 @@ class PlayerShowContainer extends Component {
     let comments = this.state.comments.map( comment => {
       return (
         <CommentTile
-          id={comment.id}
-          key={comment.player_id}
-          body={comment.body}
-          user_id={comment.user_id}
-          player_id={comment.player_id}
+          id={comment[0].id}
+          key={comment[0].id}
+          body={comment[0].body}
+          username={comment[1]}
         />
       )
     })
@@ -47,7 +46,9 @@ class PlayerShowContainer extends Component {
         last_name={this.state.player.last_name}
         avatar_url={this.state.player.avatar_url}
       />
-      {comments}
+      <div className='comments'>
+        {comments}
+      </div>
     </div>
     )
   }
