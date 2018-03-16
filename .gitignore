@@ -25,6 +25,7 @@ yarn-debug.log*
 .yarn-integrity
 .env
 ~/.fog
+/config/initializers/fog.rb
 /config/initializers/carrierwave.rb
 package-lock.json
 /public/uploads

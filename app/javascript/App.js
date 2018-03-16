@@ -5,6 +5,7 @@ import PlayerShowContainer from './containers/PlayerShowContainer'
 import TeamContainer from './containers/TeamContainer'
 import TeamShowContainer from './containers/TeamShowContainer'
 import Layout from './components/Layout'
+import 'whatwg-fetch';
 
 const App = props => {
   return (

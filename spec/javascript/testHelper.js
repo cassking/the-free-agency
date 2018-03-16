@@ -2,6 +2,7 @@ import { shallow, mount } from 'enzyme';
 import jasmineEnzyme from 'jasmine-enzyme';
 import React from 'react';
 import 'jasmine-ajax';
+import 'whatwg-fetch';
 
 Object.assign(global, {
   jasmineEnzyme,
