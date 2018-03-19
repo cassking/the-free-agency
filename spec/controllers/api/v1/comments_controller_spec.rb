@@ -37,7 +37,9 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
   describe 'POST#create' do
     it 'should return a new comment' do
       sign_in user1
-      post :create, params: { comment: { body: 'hi' }, player_id: james_harden.id }
+      post :create, params: {
+        comment: { body: 'hi' }, player_id: james_harden.id
+      }
 
       returned_json = JSON.parse(response.body)
 
