@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PlayerTile from '../components/PlayerTile';
-
+import Search from '../components/Search';
 
 class PlayerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: []
+      players: [],
+      all_players: []
     }
+    this.searchPlayers = this.searchPlayers.bind(this)
   }
 
   componentDidMount() {
@@ -16,10 +18,23 @@ class PlayerContainer extends Component {
       let parsed = response.json()
       return parsed
     }).then(players => {
-      this.setState({ players: players})
+      this.setState({
+        players: players,
+        all_players: players
+      })
     })
   }
 
+  searchPlayers(query){
+    if(query){
+      let results = this.state.players.filter((player) => {
+        return player.last_name.toLowerCase().includes(query) || player.first_name.toLowerCase().includes(query)
+      });
+      this.setState({ players: results })
+    } else {
+      this.setState({ players: this.state.all_players })
+    }
+ }
   render() {
     let players = this.state.players.map(player => {
       return(
@@ -34,10 +49,15 @@ class PlayerContainer extends Component {
     })
     return(
       <div>
+        <div className="search-container">
+          <Search searchPlayers={this.searchPlayers}/>
+        </div>
         {players}
       </div>
     )
   }
+
+
 }
 
 export default PlayerContainer;
