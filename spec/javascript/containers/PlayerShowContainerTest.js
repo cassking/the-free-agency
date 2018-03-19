@@ -1,7 +1,7 @@
 import PlayerShowContainer from '../../../app/javascript/containers/PlayerShowContainer';
 import PlayerShow from '../../../app/javascript/components/PlayerShow';
 import StatsTile from '../../../app/javascript/components/StatsTile';
-import CommentForm from '../../../app/javascript/components/CommentForm';
+import CommentFormContainer from '../../../app/javascript/containers/CommentFormContainer';
 import CommentTile from '../../../app/javascript/components/CommentTile';
 
 
@@ -33,9 +33,7 @@ describe('PlayerShowContainer', () => {
      expect(wrapper.state()).toEqual({
        player: {},
        comments: [],
-       comment: '',
        stat: {},
-       errors: {},
        signed_in: false
      })
   });
@@ -47,9 +45,9 @@ describe('PlayerShowContainer', () => {
   it('should render a Stats Component', () => {
     expect(wrapper.find(StatsTile)).toBePresent();
   });
-  it('should render a CommentForm Component', () => {
+  it('should render a CommentFormContainer Component', () => {
     wrapper.setState({signed_in: true})
-    expect(wrapper.find(CommentForm)).toBePresent();
+    expect(wrapper.find(CommentFormContainer)).toBePresent();
   });
   it('should render a CommentTile Component', () => {
     wrapper.setState({comments: [[{body: 'hi', id: '1', key: '1', username: 'name'}]]})

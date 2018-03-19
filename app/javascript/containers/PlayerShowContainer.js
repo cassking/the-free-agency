@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PlayerShow from '../components/PlayerShow';
 import CommentTile from '../components/CommentTile';
 import StatsTile from '../components/StatsTile';
-import CommentForm from '../components/CommentForm';
+import CommentFormContainer from './CommentFormContainer';
 
 class PlayerShowContainer extends Component {
   constructor(props) {
@@ -10,13 +10,9 @@ class PlayerShowContainer extends Component {
     this.state = {
       player: {},
       comments: [],
-      comment: '',
       stat: {},
-      errors: {},
       signed_in: false
     }
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.addNewComment = this.addNewComment.bind(this);
   }
 
@@ -46,53 +42,6 @@ class PlayerShowContainer extends Component {
       this.setState({comments: body.comments})
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault();
-    if (
-      this.validateSignedIn(this.state.signed_in) && this.validateBodyChange(this.state.comment)
-    ) {
-      let payload = {
-        comment: {
-          body: this.state.comment
-        }
-      }
-      this.addNewComment(payload)
-      this.setState({
-        comment: ''
-      })
-    }
-  }
-
-  handleChange(e) {
-    this.setState({ comment: e.target.value })
-  }
-
-  validateSignedIn(signed_in) {
-    if (signed_in === false) {
-      let newError = { SignIn: 'User must be signed in.' }
-      this.setState({ errors: Object.assign(this.state.errors, newError) })
-      return false
-    } else {
-      let errorState = this.state.errors
-      delete errorState.SignIn
-      this.setState({ errors: errorState })
-      return true
-    }
-  }
-
-  validateBodyChange(body) {
-    if (body.trim() === '') {
-      let newError = { Body: 'Body may not be blank.' }
-      this.setState({ errors: Object.assign(this.state.errors, newError) })
-      return false
-    } else {
-      let errorState = this.state.errors
-      delete errorState.Body
-      this.setState({ errors: errorState })
-      return true
-    }
   }
 
   componentDidMount() {
@@ -133,21 +82,6 @@ class PlayerShowContainer extends Component {
         />
       )
     })
-    let errorDiv;
-    let errorItems;
-    if (Object.keys(this.state.errors).length > 0) {
-      errorItems = Object.values(this.state.errors).map(error => {
-        return(<li key={error}>{error}</li>)
-      })
-      errorDiv = <div className="callout alert">{errorItems}</div>
-    }
-    let commentForm;
-    if (this.state.signed_in) {
-      commentForm = <CommentForm             comment={this.state.comment}             handleFormSubmit={this.handleFormSubmit}              handleChange={this.handleChange} />
-    }
-    else {
-      commentForm = <p>Sign in to comment</p>
-    }
     return(
       <div className="player_show_comments">
       <PlayerShow
@@ -157,6 +91,7 @@ class PlayerShowContainer extends Component {
         last_name={this.state.player.last_name}
         avatar_url={this.state.player.avatar_url}
       />
+      <hr />
       <StatsTile
         id={this.state.stat.id}
         key={this.state.player.last_name+this.state.stat.ppg+this.state.stat.apg+this.state.stat.rpg}
@@ -164,9 +99,12 @@ class PlayerShowContainer extends Component {
         apg={this.state.stat.apg}
         rpg={this.state.stat.rpg}
       />
-      {errorDiv}
-      {commentForm}
-
+      <hr />
+      <CommentFormContainer
+        addNewComment={this.addNewComment}
+        signed_in={this.state.signed_in}
+      />
+      <hr />
       <div className='comments'>
         {comments}
       </div>
