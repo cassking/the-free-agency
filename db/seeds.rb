@@ -8,8 +8,21 @@
 
 Player.delete_all
 Stat.delete_all
+User.delete_all
+Comment.delete_all
+Team.delete_all
 
-james_harden = Player.create(
+team1 = Team.create!(
+      name: 'team1',
+      city: 'that place',
+      state: 'that state',
+      logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
+      win: '100',
+      loss: '0',
+      ranking: '1'
+    )
+
+james_harden = Player.create!(
   first_name: "James",
   last_name: "Harden",
   avatar_url: "https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000&cropX1=1335&cropX2=3965&cropY1=104&cropY2=2735",
@@ -18,17 +31,18 @@ james_harden = Player.create(
   weight: "220",
   birth_city: "Los Angeles, CA",
   birth_country: "USA",
-  position: "SG"
+  position: "SG",
+  team: team1
 )
 
-Stat.create(
+Stat.create!(
   player_id: james_harden.id,
   ppg: "30",
   apg: "9.4",
   rpg: "5"
 )
 
-kevin_durant = Player.create(
+kevin_durant = Player.create!(
   first_name: "Kevin",
   last_name: "Durant",
   avatar_url: "http://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId=kevin-durant&width=620&height=620",
@@ -37,16 +51,16 @@ kevin_durant = Player.create(
   weight: "240",
   birth_city: "Washington, D.C.",
   birth_country: "USA",
-  position: "SF"
+  position: "SF",
+  team: team1
 )
 
-Stat.create(
+Stat.create!(
   player_id: kevin_durant.id,
   ppg: "30",
   apg: "9.4",
   rpg: "5"
 )
-User.delete_all
 
 u1 = User.create!(username: "u1",email: "u1@gmail.com", password: "pw1234")
 u2 = User.create!(username: "u2",email: "u2@gmail.com", password: "pw1234")
