@@ -10,7 +10,7 @@ class Search extends Component {
         <div className="row">
           <div className="input-field">
             <label>Search</label>
-            <input type="text" onKeyUp={this.handleSearch.bind(this)}/>
+            <input id="search" name="search" type="text" onKeyUp={this.handleSearch.bind(this)}/>
           </div>
         </div>
       )

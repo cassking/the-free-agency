@@ -30,9 +30,9 @@ class PlayerContainer extends Component {
       let results = this.state.players.filter((player) => {
         return player.last_name.toLowerCase().includes(query) || player.first_name.toLowerCase().includes(query)
       });
-      this.setState({ players: results })
+      this.setState({ all_players: results })
     } else {
-      this.setState({ players: this.state.all_players })
+      this.setState({ players: this.state.players })
     }
  }
   render() {
