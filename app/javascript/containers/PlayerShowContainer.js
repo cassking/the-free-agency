@@ -55,6 +55,7 @@ class PlayerShowContainer extends Component {
         apg={this.state.stat.apg}
         rpg={this.state.stat.rpg}
       />
+      <CommentForm />
       <div className='comments'>
         {comments}
       </div>
