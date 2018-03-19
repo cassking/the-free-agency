@@ -25,7 +25,8 @@ describe('PlayerContainer', () => {
 
   it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
-       players: [],  all_players: []
+       players: [],
+       all_players: []
      })
   });
 
