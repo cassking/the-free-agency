@@ -1,7 +1,7 @@
 import PlayerShowContainer from '../../../app/javascript/containers/PlayerShowContainer';
 import PlayerShow from '../../../app/javascript/components/PlayerShow';
 import StatsTile from '../../../app/javascript/components/StatsTile';
-
+import CommentForm from '../../../app/javascript/components/CommentForm';
 
 describe('PlayerShowContainer', () => {
   let wrapper;
@@ -31,7 +31,10 @@ describe('PlayerShowContainer', () => {
      expect(wrapper.state()).toEqual({
        player: {},
        comments: [],
-       stat: {}
+       comment: '',
+       stat: {},
+       errors: {},
+       signed_in: false
      })
   });
   it('should render an PlayerShow Component', () => {
@@ -39,5 +42,9 @@ describe('PlayerShowContainer', () => {
   });
   it('should render a Stats Component', () => {
     expect(wrapper.find(StatsTile)).toBePresent();
+  });
+  it('should render a CommentForm Component', () => {
+    wrapper.setState({signed_in: true})
+    expect(wrapper.find(CommentForm)).toBePresent();
   });
 });
