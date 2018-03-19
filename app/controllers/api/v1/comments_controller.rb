@@ -7,13 +7,14 @@ class Api::V1::CommentsController < ApplicationController
     @comment.player = Player.find(params[:player_id])
     if @comment.save
       @comments = Comment.where(player_id: params[:player_id])
-      @comments_sorted = @comments.sort_by { |comment| comment.created_at}.reverse
+      @comments_sorted = @comments.sort_by { |comment| comment.created_at }.reverse
       @comments_with_username = @comments_sorted.map { |comment| [comment, comment.user.username] }
       render json: { comment: @comment, comments: @comments_with_username }
     end
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:body)
   end
