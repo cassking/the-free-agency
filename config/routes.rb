@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "static_pages#index"
-  devise_for :users
+  devise_for :users, controllers: {sessions: "sessions"}
+
   resources :dashboard, only: [:index]
   match 'users/:id' => 'dashboard#destroy', :via => :delete, :as => :admin_destroy_user
 
