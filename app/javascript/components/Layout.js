@@ -1,15 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
+import BackButton from './BackButton';
 
 const Layout = (props) => {
- return(
-   <div>
-     <div className="right">
-         <Link className="button secondary small" to='/teams'> Teams </Link>
-     </div>
-     {props.children}
-   </div>
- )
+  return(
+    <div>
+      <nav className="side-bar">
+        <section className="side-bar-section">
+          <ul className="top">
+            <BackButton />
+            <Link className="button secondary small" to='/teams'> Teams </Link>
+          </ul>
+        </section>
+      </nav>
+
+      {props.children}
+    </div>
+  )
 }
 
 export default Layout;

@@ -27,8 +27,21 @@ feature 'admin visits dashboard', %(
     fill_in 'Password', with: admin.password
     click_on 'Log in'
     visit dashboard_index_path
-    click_on('Destroy')
+    click_on 'Delete User'
     expect(page).to have_content('Admin Dashboard')
+    expect(page).to have_content('User deleted')
+  end
+
+  scenario 'user deletes self' do
+    user = FactoryBot.create(:user)
+    visit '/'
+    click_on 'Sign In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Log in'
+    visit edit_dashboard_path(user)
+    click_on 'Delete User'
+    expect(page).to have_content('Sign Up')
     expect(page).to have_content('User deleted')
   end
 end
