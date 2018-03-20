@@ -3,6 +3,7 @@ import PlayerShow from '../components/PlayerShow';
 import CommentTile from '../components/CommentTile';
 import StatsTile from '../components/StatsTile';
 import CommentFormContainer from './CommentFormContainer';
+import VoteTile from '../components/VoteTile'
 
 class PlayerShowContainer extends Component {
   constructor(props) {
@@ -11,11 +12,12 @@ class PlayerShowContainer extends Component {
       player: {},
       comments: [],
       stat: {},
-      signed_in: false
+      signed_in: false,
+      up_or_down:0
     }
     this.addNewComment = this.addNewComment.bind(this);
+    this.handleVote = this.handleVote.bind(this);
   }
-
 
   addNewComment(formPayload) {
     let playerId = this.props.params.id
@@ -44,7 +46,14 @@ class PlayerShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  componentDidMount() {
+  handleVote(event) {
+    console.log(event.target.value)
+    this.getShowData()
+  }
+  componentDidMount(){
+    this.getShowData();
+  }
+  getShowData(){
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}`, {
       credentials: 'same-origin'
@@ -74,12 +83,20 @@ class PlayerShowContainer extends Component {
   render() {
     let comments = this.state.comments.map( comment => {
       return (
+        <div className="comment-vote">
         <CommentTile
           id={comment[0].id}
           key={comment[0].id}
           body={comment[0].body}
           username={comment[1]}
         />
+        <VoteTile
+          id={this.id}
+          key={comment.user_id+comment.player_id+comment.user_id}
+          onDownVote={this.handleVote}
+          onUpVote={this.handleVote}
+        />
+      </div>
       )
     })
     return(

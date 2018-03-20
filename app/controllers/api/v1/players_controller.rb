@@ -14,12 +14,14 @@ class Api::V1::PlayersController < ApplicationController
     @comments_with_username = @comments_sorted.map do |comment|
       [comment, comment.user.username]
     end
+    #return all votes from this user
     @stat = Stat.find_by(player_id: params[:id])
     render json: {
       player: @player,
       comments: @comments_with_username,
       stat: @stat,
       signed_in: @signed_in
+      #add up_down_vote
     }
   end
 end
