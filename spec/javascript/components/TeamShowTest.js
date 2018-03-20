@@ -14,7 +14,7 @@ describe('TeamShow', () => {
     )
   });
 
-  it('should render an h2 tag', () => {
-    expect(wrapper.find('h2')).toBePresent();
+  it('should render team name', () => {
+    expect(wrapper.find('h2').text()).toEqual('Houston Rockets');
   });
 })

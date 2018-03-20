@@ -9,17 +9,17 @@ describe('TeamTile ', () => {
       <TeamTile
         key="3"
         id="3"
-        name= "Denver Nuggets"
+        name="Denver Nuggets"
         logo_url ='http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3907387.png'
       />
     )
   });
 
-  it('should render an h4 tag', () => {
-    expect(wrapper.find('h4')).toBePresent();
+  it('should render name', () => {
+    expect(wrapper.find('h4').text()).toEqual('Denver Nuggets');
   });
 
   it('should render an img tag', () => {
-    expect(wrapper.find('img')).toBePresent();
+    expect(wrapper.find('img').html()).toEqual('<img src="http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3907387.png">');
   });
 })
