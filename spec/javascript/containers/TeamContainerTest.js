@@ -2,15 +2,8 @@ import React from 'react';
 import TeamContainer from '../../../app/javascript/containers/TeamContainer';
 import TeamTile from '../../../app/javascript/components/TeamTile';
 
-describe('PlayerContainer', () => {
+describe('TeamContainer', () => {
   let wrapper;
-  let player1 = {
-    player: [{
-      first_name: 'James',
-      last_name: 'Harden',
-      avatar_url: 'https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000&cropX1=1335&cropX2=3965&cropY1=104&cropY2=2735'
-    }]
-  }
   beforeEach(() => {
     spyOn(global, 'fetch').and.callFake(() => {
       let responseBody = JSON.stringify(player1);
@@ -22,20 +15,27 @@ describe('PlayerContainer', () => {
       return Promise.resolve(response);
     });
 
-    wrapper = mount(<PlayerContainer />);
+    wrapper = shallow(<TeamContainer />);
   });
 
   it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
-       players: []
+       teams: []
      })
   });
 
-   it('should render the PlayerTile with different props, when players is not an empty array', (done) => {
-   setTimeout(() => {
-     expect(wrapper.findWhere(node => node.hasClass('player')))
-     expect(wrapper.findWhere(node => node.type() === 'div'))
-     done();
-   }, 0)
- });
+  it('should render an TeamTile Component', () => {
+    wrapper.setState({teams: [{
+      "key":2,
+      "id" :1,
+      "name":"team1",
+      "logo_url":"google.com"
+    }
+  ]})
+    expect(wrapper.find(TeamTile)).toBePresent();
+  });
+  it('should not render an TeamTile Component', () => {
+    wrapper.setState({teams: []})
+    expect(wrapper.find(TeamTile)).not.toBePresent();
+  });
 });

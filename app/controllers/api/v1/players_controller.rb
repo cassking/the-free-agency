@@ -15,14 +15,12 @@ class Api::V1::PlayersController < ApplicationController
       [comment, comment.user.username]
     end
     @stat = Stat.find_by(player_id: params[:id])
-      @team = @player.team
+
     render json: {
       player: @player,
       comments: @comments_with_username,
       stat: @stat,
       signed_in: @signed_in
     }
-
-
   end
 end

@@ -19,10 +19,6 @@ describe('TeamTile ', () => {
     expect(wrapper.find('h4')).toBePresent();
   });
 
-  // it('should render an h3 tag', () => {
-  //   expect(wrapper.find('h3')).toBePresent();
-  // });
-
   it('should render an img tag', () => {
     expect(wrapper.find('img')).toBePresent();
   });

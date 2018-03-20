@@ -18,6 +18,8 @@ class PlayerShowContainer extends Component {
 
 
   addNewComment(formPayload) {
+    debugger;
+
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}/comments`, {
       method: 'POST',
@@ -44,7 +46,7 @@ class PlayerShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}`, {
       credentials: 'same-origin'
