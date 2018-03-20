@@ -18,8 +18,6 @@ class PlayerShowContainer extends Component {
 
 
   addNewComment(formPayload) {
-    debugger;
-
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}/comments`, {
       method: 'POST',
