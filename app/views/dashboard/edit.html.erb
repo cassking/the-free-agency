@@ -1,0 +1,2 @@
+<h2> Settings for <%= current_user.username %></h2>
+  <%= link_to 'Delete User', admin_destroy_user_path(current_user), method: :delete %>

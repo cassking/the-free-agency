@@ -14,7 +14,6 @@ const Layout = (props) => {
         </section>
       </nav>
 
-
       {props.children}
     </div>
   )

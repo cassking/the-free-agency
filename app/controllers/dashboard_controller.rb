@@ -1,13 +1,24 @@
 class DashboardController < ApplicationController
-  before_action :authorize_user
+  before_action :authorize_user, except: [:edit, :destroy]
   def index
     @users = User.all
   end
 
   def destroy
     @user = User.find(params[:id])
+    @comments = @user.comments
+    if_admin = current_user.admin?
     @user.destroy
-    redirect_to dashboard_index_path, notice: 'User deleted' if @user.destroy
+    @comments.destroy
+    if if_admin
+      redirect_to 'dashboard_index_path', notice: 'User deleted' if @user.destroy
+    else
+      redirect_to '/', notice: 'User deleted' if @user.destroy
+    end
+  end
+
+  def edit
+    @user = current_user
   end
 
   protected
