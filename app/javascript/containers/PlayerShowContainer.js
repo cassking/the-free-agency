@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PlayerShow from '../components/PlayerShow';
 import CommentTile from '../components/CommentTile';
-import StatsTile from '../components/StatsTile'
+import StatsTile from '../components/StatsTile';
+import CommentFormContainer from './CommentFormContainer';
 
 class PlayerShowContainer extends Component {
   constructor(props) {
@@ -9,13 +10,54 @@ class PlayerShowContainer extends Component {
     this.state = {
       player: {},
       comments: [],
-      stat: {}
+      stat: {},
+      signed_in: false
     }
+    this.addNewComment = this.addNewComment.bind(this);
+  }
+
+
+  addNewComment(formPayload) {
+    let playerId = this.props.params.id
+    fetch(`/api/v1/players/${playerId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify(formPayload),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({comments: body.comments})
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   componentDidMount() {
     let playerId = this.props.params.id
-    fetch(`/api/v1/players/${playerId}`)
+    fetch(`/api/v1/players/${playerId}`, {
+      credentials: 'same-origin'
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
     .then(response => {
       let parsed = response.json()
       return parsed
@@ -23,7 +65,8 @@ class PlayerShowContainer extends Component {
       this.setState({
         player: body['player'],
         comments: body['comments'],
-        stat: body['stat']
+        stat: body['stat'],
+        signed_in: body['signed_in']
       })
     })
   }
@@ -48,6 +91,7 @@ class PlayerShowContainer extends Component {
         last_name={this.state.player.last_name}
         avatar_url={this.state.player.avatar_url}
       />
+      <hr />
       <StatsTile
         id={this.state.stat.id}
         key={this.state.player.last_name+this.state.stat.ppg+this.state.stat.apg+this.state.stat.rpg}
@@ -55,6 +99,12 @@ class PlayerShowContainer extends Component {
         apg={this.state.stat.apg}
         rpg={this.state.stat.rpg}
       />
+      <hr />
+      <CommentFormContainer
+        addNewComment={this.addNewComment}
+        signed_in={this.state.signed_in}
+      />
+      <hr />
       <div className='comments'>
         {comments}
       </div>
