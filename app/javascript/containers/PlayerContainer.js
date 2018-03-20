@@ -6,8 +6,8 @@ class PlayerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [],
-      all_players: []
+      searchedPlayers: [],
+      allPlayers: []
     }
     this.searchPlayers = this.searchPlayers.bind(this)
   }
@@ -19,24 +19,24 @@ class PlayerContainer extends Component {
       return parsed
     }).then(players => {
       this.setState({
-        players: players,
-        all_players: players
+        searchedPlayers: players,
+        allPlayers: players
       })
     })
   }
 
   searchPlayers(query){
     if(query){
-      let results = this.state.players.filter((player) => {
+      let results = this.state.allPlayers.filter((player) => {
         return player.last_name.toLowerCase().includes(query) || player.first_name.toLowerCase().includes(query)
       });
-      this.setState({ all_players: results })
+      this.setState({ searchedPlayers: results })
     } else {
-      this.setState({ players: this.state.players })
+      this.setState({ searchedPlayers: this.state.allPlayers })
     }
  }
   render() {
-    let players = this.state.players.map(player => {
+    let players = this.state.searchedPlayers.map(player => {
       return(
         <PlayerTile
           key={player.id}
