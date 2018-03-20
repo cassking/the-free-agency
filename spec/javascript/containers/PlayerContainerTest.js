@@ -1,5 +1,6 @@
 import PlayerContainer from '../../../app/javascript/containers/PlayerContainer';
 import PlayerTile from '../../../app/javascript/components/PlayerTile';
+import Search from '../../../app/javascript/components/Search';
 
 describe('PlayerContainer', () => {
   let wrapper;
@@ -20,7 +21,7 @@ describe('PlayerContainer', () => {
       });
       return Promise.resolve(response);
     });
-    wrapper = mount(<PlayerContainer />);
+    wrapper = shallow(<PlayerContainer />);
   });
 
   it('should have the specified intial state', () => {

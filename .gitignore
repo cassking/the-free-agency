@@ -30,3 +30,4 @@ yarn-debug.log*
 package-lock.json
 /public/uploads
 config/initializers/fog.rb
+/spec/tmp

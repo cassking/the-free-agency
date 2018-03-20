@@ -8,19 +8,29 @@
 
 Player.delete_all
 Stat.delete_all
-User.delete_all
-Comment.delete_all
 Team.delete_all
+User.delete_all
 
 team1 = Team.create!(
-      name: 'team1',
-      city: 'that place',
-      state: 'that state',
-      logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
-      win: '100',
-      loss: '0',
-      ranking: '1'
-    )
+  name: 'team1',
+  city: 'that place',
+  state: 'that state',
+  logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
+  win: '100',
+  loss: '0',
+  ranking: '1'
+)
+
+team2 = Team.create!(
+  name: 'team2',
+  city: 'that place',
+  state: 'that state',
+  logo_url: 'http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/phi.png',
+  win: '100',
+  loss: '0',
+  ranking: '1'
+)
+
 
 james_harden = Player.create!(
   first_name: "James",

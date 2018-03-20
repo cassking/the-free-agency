@@ -15,6 +15,7 @@ class Api::V1::PlayersController < ApplicationController
       [comment, comment.user.username]
     end
     @stat = Stat.find_by(player_id: params[:id])
+
     render json: {
       player: @player,
       comments: @comments_with_username,

@@ -16,9 +16,10 @@ describe('PlayerShowContainer', () => {
   }
   let stat1 = {ppg: '30', rpg: '5', apg: '9.4'}
   let comments = [{body: 'hi', id: '1', key: '1', username: 'name'}]
+  let signed_in = {signed_in: false}
   beforeEach(() => {
     spyOn(global, 'fetch').and.callFake(() => {
-      let responseBody = JSON.stringify({player1, comments, stat1});
+      let responseBody = JSON.stringify({player1, comments, stat1, signed_in});
       let response = new Response(responseBody, {
         status: '200',
         statusText: 'OK',
