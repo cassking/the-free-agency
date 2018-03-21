@@ -7,7 +7,7 @@ const VoteTile = props => {
     <div className="vote">
       <button className="vote" onClick={props.onUpVote}>&#8679;</button>
       <button className="vote" onClick={props.onDownVote}>&#8681;</button>
-      <span className="votecount">total no. upvotes: </span>
+      <p>vote count: {props.voteCount}</p>
     </div>
   )
 }

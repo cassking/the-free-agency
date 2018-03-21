@@ -11,10 +11,12 @@ class Api::V1::CommentsController < ApplicationController
         comment.created_at
       end
       @comments_sorted.reverse!
-      @comments_with_username = @comments_sorted.map do |comment|
+
+      @comments_with_data_props = @comments_sorted.map do |comment|
         [comment, comment.user.username]
       end
-      render json: { comment: @comment, comments: @comments_with_username }
+      @votes =  Vote.where(id: params[:comment_id])
+      render json: { votes: @votes, comment: @comment, comments: @comments_with_username }
     end
   end
 
@@ -22,5 +24,13 @@ class Api::V1::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def vote_params
+    params.require(:vote).permit(
+      :user_id,
+      :comment_id,
+      :up_or_down
+    )
   end
 end

@@ -3,7 +3,6 @@ import PlayerShow from '../components/PlayerShow';
 import CommentTile from '../components/CommentTile';
 import StatsTile from '../components/StatsTile';
 import CommentFormContainer from './CommentFormContainer';
-import VoteTile from '../components/VoteTile'
 
 class PlayerShowContainer extends Component {
   constructor(props) {
@@ -12,11 +11,9 @@ class PlayerShowContainer extends Component {
       player: {},
       comments: [],
       stat: {},
-      signed_in: false,
-      up_or_down:0
+      signed_in: false
     }
     this.addNewComment = this.addNewComment.bind(this);
-    this.handleVote = this.handleVote.bind(this);
   }
 
   addNewComment(formPayload) {
@@ -46,10 +43,6 @@ class PlayerShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
-  handleVote(event) {
-    console.log(event.target.value)
-    this.getShowData()
-  }
   componentDidMount(){
     this.getShowData();
   }
@@ -60,17 +53,22 @@ class PlayerShowContainer extends Component {
     })
     .then(response => {
       if (response.ok) {
-        return response;
+        let parsed = response.json()
+       return parsed
+        // return response;
       } else {
         let errorMessage = `${response.status} (${response.statusText})`,
         error = new Error(errorMessage);
         throw(error);
       }
     })
-    .then(response => {
-      let parsed = response.json()
-      return parsed
-    }).then(body => {
+    //is this duplicate response ?
+    //no need to return response twice
+    // .then(response => {
+    //   let parsed = response.json()
+    //   return parsed
+    // })
+    .then(body => {
       this.setState({
         player: body['player'],
         comments: body['comments'],
@@ -89,12 +87,7 @@ class PlayerShowContainer extends Component {
           key={comment[0].id}
           body={comment[0].body}
           username={comment[1]}
-        />
-        <VoteTile
-          id={this.id}
-          key={comment.user_id+comment.player_id+comment.user_id}
-          onDownVote={this.handleVote}
-          onUpVote={this.handleVote}
+          playerId={comment[0].player_id}
         />
       </div>
       )
