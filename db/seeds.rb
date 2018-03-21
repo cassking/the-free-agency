@@ -11,25 +11,21 @@ Stat.delete_all
 Team.delete_all
 User.delete_all
 
-team1 = Team.create!(
-  name: 'team1',
-  city: 'that place',
-  state: 'that state',
-  logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
-  win: '100',
-  loss: '0',
-  ranking: '1'
-)
+players = ActiveSupport::JSON.decode(File.read('db/seeds/active_players.json'))
+stats = ActiveSupport::JSON.decode(File.read('db/seeds/player_stats.json'))
+teams = ActiveSupport::JSON.decode(File.read('db/seeds/teams.json'))
 
-team2 = Team.create!(
-  name: 'team2',
-  city: 'that place',
-  state: 'that state',
-  logo_url: 'http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/phi.png',
-  win: '100',
-  loss: '0',
-  ranking: '1'
-)
+teams.each do |team|
+  Team.create!(
+    name: team["full_name"],
+    city: team["city"],
+    state: team["state"],
+    logo_url: "http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/#{team["abbreviation"]}.png",
+    win: 0,
+    loss: 0,
+    ranking: 0
+  )
+end
 
 
 james_harden = Player.create!(
@@ -42,7 +38,7 @@ james_harden = Player.create!(
   birth_city: "Los Angeles, CA",
   birth_country: "USA",
   position: "SG",
-  team: team1
+  team: Team.last
 )
 
 Stat.create!(
@@ -62,7 +58,7 @@ kevin_durant = Player.create!(
   birth_city: "Washington, D.C.",
   birth_country: "USA",
   position: "SF",
-  team: team1
+  team: Team.last
 )
 
 Stat.create!(

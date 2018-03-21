@@ -1,0 +1,369 @@
+{
+  "player_stats": {
+    "Luke Babbitt": {
+      "PPG": "5.7",
+      "APG": "0.6",
+      "RPG": "2.0"
+    },
+    "Marco Belinelli":{
+      "PPG": "11.4",
+      "APG": "1.8",
+      "RPG": "1.9"
+    },
+    "Dewayne Dedmon":{
+      "PPG": "9.8",
+      "APG": "1.4",
+      "RPG": "7.4"
+    },
+    "Aron Baynes":{
+      "PPG": "5.7",
+      "APG": "1.0",
+      "RPG": "5.2"
+    },
+    "Shane Larkin":{
+      "PPG": "3.5",
+      "APG": "1.2",
+      "RPG": "1.2"
+    },
+    "Quincy Acy":{
+      "PPG": "5.5",
+      "APG": "0.8",
+      "RPG": "3.9"
+    },
+    "Joe Harris":{
+      "PPG": "10.5",
+      "APG": "1.5",
+      "RPG": "3.4"
+    },
+    "Sean Kilpatrick":{
+      "PPG": "4.3",
+      "APG": "0.8",
+      "RPG": "1.5"
+    },
+    "Jeremy Lin":{
+      "PPG": "18.0",
+      "APG": "4.0",
+      "RPG": "0.0"
+    },
+    "Michael Carter-Williams":{
+      "PPG": "4.6",
+      "APG": "2.2",
+      "RPG": "2.7"
+    },
+    "Johnny O'Bryant III":{
+      "PPG": "4.8",
+      "APG": "0.5",
+      "RPG": "2.6"
+    },
+    "Zach LaVine":{
+      "PPG": "16.9",
+      "APG": "3.0",
+      "RPG": "3.8"
+    },
+    "Nikola Mirotic":{
+      "PPG": "15.9",
+      "APG": "1.6",
+      "RPG": "7.0"
+    },
+    "Quincy Pondexter":{
+      "PPG": "2.0",
+      "APG": "0.4",
+      "RPG": "1.2"
+    },
+    "Jose Calderon":{
+      "PPG": "3.8",
+      "APG": "1.9",
+      "RPG": "1.3"
+    },
+    "Jeff Green":{
+      "PPG": "10.4",
+      "APG": "1.2",
+      "RPG": "3.3"
+    },
+    "LeBron James":{
+      "PPG": "26.9",
+      "APG": "9.0",
+      "RPG": "8.4"
+    },
+    "Iman Shumpert":{
+      "PPG": "4.4",
+      "APG": "1.2",
+      "RPG": "2.9"
+    },
+    "Isaiah Thomas":{
+      "PPG": "15.3",
+      "APG": "5.0",
+      "RPG": "2.1"
+    },
+    "Yogi Ferrell":{
+      "PPG": "10.1",
+      "APG": "2.3",
+      "RPG": "3.3"
+    },
+    "Wesley Matthews":{
+      "PPG": "12.7",
+      "APG": "2.7",
+      "RPG": "3.1"
+    },
+    "Dirk Nowitzki":{
+      "PPG": "12.4",
+      "APG": "1.6",
+      "RPG": "5.7"
+    },
+    "Will Barton":{
+      "PPG": "15.0",
+      "APG": "4.2",
+      "RPG": "5.0"
+    },
+    "Wilson Chandler":{
+      "PPG": "9.9",
+      "APG": "2.1",
+      "RPG": "5.2"
+    },
+    "Avery Bradley":{
+      "PPG": "14.3",
+      "APG": "2.0",
+      "RPG": "2.5"
+    },
+    "Seth Curry":{
+      "PPG": "12.8",
+      "APG": "2.7",
+      "RPG": "2.6"
+    },
+    "Kevin Durant":{
+      "PPG": "26.6",
+      "APG": "5.3",
+      "RPG": "6.8"
+    },
+    "Omri Casspi":{
+      "PPG": "5.5",
+      "APG": "1.0",
+      "RPG": "3.8"
+    },
+    "JaVale McGee":{
+      "PPG": "4.5",
+      "APG": "0.5",
+      "RPG": "2.3"
+    },
+    "Zaza Pachulia":{
+      "PPG": "5.8",
+      "APG": "1.7",
+      "RPG": "4.7"
+    },
+    "Nick Young":{
+      "PPG": "6.5",
+      "APG": "0.4",
+      "RPG": "1.3"
+    },
+    "Trevor Ariza":{
+      "PPG": "12.1",
+      "APG": "1.5",
+      "RPG": "4.5"
+    },
+    "Luc Mbah a Moute":{
+      "PPG": "7.6",
+      "APG": "1.0",
+      "RPG": "3.2"
+    },
+    "Chris Paul":{
+      "PPG": "18.8",
+      "APG": "8.1",
+      "RPG": "5.4"
+    },
+    "Cory Joseph":{
+      "PPG": "8.1",
+      "APG": "3.1",
+      "RPG": "3.3"
+    },
+    "Glenn Robinson III":{
+      "PPG": "3.6",
+      "APG": "0.9",
+      "RPG": "1.1"
+    },
+    "Lance Stephenson":{
+      "PPG": "9.1",
+      "APG": "2.9",
+      "RPG": "5.9"
+    },
+    "Thaddeus Young":{
+      "PPG": "11.5",
+      "APG": "1.9",
+      "RPG": "6.0"
+    },
+    "Wesley Johnson":{
+      "PPG": "5.8",
+      "APG": "0.9",
+      "RPG": "3.2"
+    },
+    "DeAndre Jordan":{
+      "PPG": "11.9",
+      "APG": "1.4",
+      "RPG": "15.3"
+    },
+    "Austin Rivers":{
+      "PPG": "15.5",
+      "APG": "3.8",
+      "RPG": "2.5"
+    },
+    "Milos Teodosic":{
+      "PPG": "9.4",
+      "APG": "5.0",
+      "RPG": "3.0"
+    },
+    "Lou Williams":{
+      "PPG": "23.1",
+      "APG": "5.4",
+      "RPG": "2.6"
+    },
+    "Corey Brewer":{
+      "PPG": "4.3",
+      "APG": "0.7",
+      "RPG": "1.8"
+    },
+    "Kentavious Caldwell-Pope":{
+      "PPG": "13.7",
+      "APG": "2.2",
+      "RPG": "5.4"
+    },
+    "Brook Lopez":{
+      "PPG": "12.5",
+      "APG": "1.6",
+      "RPG": "3.8"
+    },
+    "Mario Chalmers":{
+      "PPG": "7.9",
+      "APG": "3.1",
+      "RPG": "2.4"
+    },
+    "Tyreke Evans":{
+      "PPG": "19.4",
+      "APG": "5.1",
+      "RPG": "5.1"
+    },
+    "Brandan Wright":{
+      "PPG": "5.0",
+      "APG": "0.5",
+      "RPG": "3.4"
+    },
+    "Wayne Ellington":{
+      "PPG": "11.1",
+      "APG": "1.1",
+      "RPG": "3.0"
+    },
+    "Jamal Crawford":{
+      "PPG": "10.2",
+      "APG": "2.3",
+      "RPG": "1.1"
+    },
+    "Shabazz Muhammad":{
+      "PPG": "3.7",
+      "APG": "0.2",
+      "RPG": "1.4"
+    },
+    "DeMarcus Cousins":{
+      "PPG": "25.2",
+      "APG": "5.4",
+      "RPG": "12.9"
+    },
+    "Rajon Rondo":{
+      "PPG": "7.8",
+      "APG": "7.6",
+      "RPG": "3.9"
+    },
+    "Michael Beasley":{
+      "PPG": "12.3",
+      "APG": "1.5",
+      "RPG": "5.4"
+    },
+    "Jarrett Jack":{
+      "PPG": "7.6",
+      "APG": "5.8",
+      "RPG": "3.1"
+    },
+    "Enes Kanter":{
+      "PPG": "14.3",
+      "APG": "10.8",
+      "RPG": "1.5"
+    },
+    "Carmelo Anthony":{
+      "PPG": "16.7",
+      "APG": "6.9",
+      "RPG": "1.3"
+    },
+    "Raymond Felton":{
+      "PPG": "7.0",
+      "APG": "2.6",
+      "RPG": "2.0"
+    },
+    "Paul George":{
+      "PPG": "22.0",
+      "APG": "3.4",
+      "RPG": "5.6"
+    },
+    "Jerami Grant":{
+      "PPG": "8.0",
+      "APG": "0.8",
+      "RPG": "4.1"
+    },
+    "Mario Hezonja":{
+      "PPG": "9.0",
+      "APG": "1.2",
+      "RPG": "3.4"
+    },
+    "Amir Johnson":{
+      "PPG": "4.6",
+      "APG": "4.4",
+      "RPG": "1.3"
+    },
+    "JJ Redick":{
+      "PPG": "16.6",
+      "APG": "3.2",
+      "RPG": "2.6"
+    },
+    "Jahlil Okafor":{
+      "PPG": "6.0",
+      "APG": "0.5",
+      "RPG": "3.0"
+    },
+    "Alex Len":{
+      "PPG": "8.0",
+      "APG": "1.2",
+      "RPG": "7.5"
+    },
+    "Greg Monroe":{
+      "PPG": "9.6",
+      "APG": "1.9",
+      "RPG": "6.7"
+    },
+    "Ed Davis":{
+      "PPG": "5.7",
+      "APG": "0.5",
+      "RPG": "7.6"
+    },
+    "Rudy Gay":{
+      "PPG": "11.4",
+      "APG": "1.4",
+      "RPG": "5.1"
+    },
+    "Danny Green":{
+      "PPG": "8.7",
+      "APG": "1.6",
+      "RPG": "3.5"
+    },
+    "Tony Parker":{
+      "PPG": "8.8",
+      "APG": "3.8",
+      "RPG": "1.9"
+    },
+    "Derrick Favors":{
+      "PPG": "12.1",
+      "APG": "1.3",
+      "RPG": "7.3"
+    },
+    "Jodie Meeks":{
+      "PPG": "6.4",
+      "APG": "0.9",
+      "RPG": "1.7"
+    }
+  }
+}
