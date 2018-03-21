@@ -70,7 +70,6 @@ class PlayerShowContainer extends Component {
         signed_in: body['signed_in'],
         team_name: body['team_name']
       })
-      debugger;
     })
   }
 
