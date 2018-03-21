@@ -11,7 +11,8 @@ class PlayerShowContainer extends Component {
       player: {},
       comments: [],
       stat: {},
-      signed_in: false
+      signed_in: false,
+      team_name: ''
     }
     this.addNewComment = this.addNewComment.bind(this);
   }
@@ -66,8 +67,10 @@ class PlayerShowContainer extends Component {
         player: body['player'],
         comments: body['comments'],
         stat: body['stat'],
-        signed_in: body['signed_in']
+        signed_in: body['signed_in'],
+        team_name: body['team_name']
       })
+      debugger;
     })
   }
 
@@ -89,6 +92,13 @@ class PlayerShowContainer extends Component {
         id={this.state.player.id}
         first_name={this.state.player.first_name}
         last_name={this.state.player.last_name}
+        age={this.state.player.age}
+        height={this.state.player.height}
+        weight={this.state.player.weight}
+        birth_city={this.state.player.birth_city}
+        birth_country={this.state.player.birth_country}
+        position={this.state.player.position}
+        team_name={this.state.team_name}
         avatar_url={this.state.player.avatar_url}
       />
       <hr />
