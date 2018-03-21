@@ -1,6 +1,23 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @signed_in = user_signed_in?
+    @comments = Comment.where(player_id: params[:player_id])
+    @comments_sorted = @comments.sort_by do |comment|
+      comment.created_at
+    end
+    @comments_sorted.reverse!
+    @comments_with_username = @comments_sorted.map do |comment|
+      [comment, comment.user.username]
+    end
+     @votes =  Vote.where(id: params[:comment_id])
+    render json: {
+      comments: @comments_with_username,
+      signed_in: @signed_in,
+      votes: @votes
+    }
+  end
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
@@ -12,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
       end
       @comments_sorted.reverse!
 
-      @comments_with_data_props = @comments_sorted.map do |comment|
+      @comments_with_username = @comments_sorted.map do |comment|
         [comment, comment.user.username]
       end
       @votes =  Vote.where(id: params[:comment_id])

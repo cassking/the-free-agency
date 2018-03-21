@@ -1,46 +1,15 @@
 import React, { Component } from 'react';
 import PlayerShow from '../components/PlayerShow';
-import CommentTile from '../components/CommentTile';
 import StatsTile from '../components/StatsTile';
-import CommentFormContainer from './CommentFormContainer';
+import CommentsContainer from './CommentsContainer';
 
 class PlayerShowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       player: {},
-      comments: [],
-      stat: {},
-      signed_in: false
+      stat: {}
     }
-    this.addNewComment = this.addNewComment.bind(this);
-  }
-
-  addNewComment(formPayload) {
-    let playerId = this.props.params.id
-    fetch(`/api/v1/players/${playerId}/comments`, {
-      method: 'POST',
-      body: JSON.stringify(formPayload),
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-        error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({comments: body.comments})
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   componentDidMount(){
@@ -55,23 +24,15 @@ class PlayerShowContainer extends Component {
       if (response.ok) {
         let parsed = response.json()
        return parsed
-        // return response;
       } else {
         let errorMessage = `${response.status} (${response.statusText})`,
         error = new Error(errorMessage);
         throw(error);
       }
     })
-    //is this duplicate response ?
-    //no need to return response twice
-    // .then(response => {
-    //   let parsed = response.json()
-    //   return parsed
-    // })
     .then(body => {
       this.setState({
         player: body['player'],
-        comments: body['comments'],
         stat: body['stat'],
         signed_in: body['signed_in']
       })
@@ -79,19 +40,6 @@ class PlayerShowContainer extends Component {
   }
 
   render() {
-    let comments = this.state.comments.map( comment => {
-      return (
-        <div className="comment-vote">
-        <CommentTile
-          id={comment[0].id}
-          key={comment[0].id}
-          body={comment[0].body}
-          username={comment[1]}
-          playerId={comment[0].player_id}
-        />
-      </div>
-      )
-    })
     return(
       <div className="player_show_comments">
       <PlayerShow
@@ -110,14 +58,9 @@ class PlayerShowContainer extends Component {
         rpg={this.state.stat.rpg}
       />
       <hr />
-      <CommentFormContainer
-        addNewComment={this.addNewComment}
-        signed_in={this.state.signed_in}
-      />
-      <hr />
-      <div className='comments'>
-        {comments}
-      </div>
+        <CommentsContainer
+          playerId={this.props.params.id}
+        />
     </div>
     )
   }

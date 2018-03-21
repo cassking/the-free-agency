@@ -1,15 +1,20 @@
 class Api::V1::VotesController < ApplicationController
   before_action :authenticate_user!
   def index
-    render json: { votes: Vote.all }
   end
 
   def create
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
     @vote = Vote.create(vote_params)
-    @current_user = current_user
-    render json: { current_user: @current_user }
-    redirect_to  api_v1_player_comment_path(new_vote.comment.player)
+    #put binding pry here to check params
+    @votes = @comment.votes
+    #return comments & votes
+    @voteCount =[]
+    @votes.map do | vote_value |
+      @voteCount << vote_value
+    end
+      binding.pry
+    render json: {  vote_count: @voteCount }
   end
 
   def update
