@@ -21,16 +21,13 @@ class Api::V1::VotesController < ApplicationController
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
-      [comment, comment.user.username, comment.votes]
+      { comment: comment,
+        username:comment.user.username,
+        votes: comment.votes
+      }
     end
 
     render json: { comments: @comments_with_username }
-  end
-
-  def update
-    @vote = Vote.find(params[:id])
-    @vote.update_attributes(vote_params)
-    render json: { vote: @vote }
   end
 
   def destroy

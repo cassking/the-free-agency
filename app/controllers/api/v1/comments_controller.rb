@@ -9,11 +9,26 @@ class Api::V1::CommentsController < ApplicationController
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
-      [comment, comment.user.username, comment.votes]
+      { comment: comment,
+        username:comment.user.username,
+        votes: comment.votes
+      }
+    end
+    @userVotes =[];
+    @comments.each do | comment |
+      if comment.votes
+        comment.votes.each do | vote |
+          if (vote.user_id === current_user.id)
+            @userVotes << vote
+          end
+        end
+    end
+
     end
     render json: {
       comments: @comments_with_username,
-      signed_in: @signed_in
+      signed_in: @signed_in,
+      userVotes: @userVotes
     }
   end
 

@@ -7,7 +7,6 @@ class CommentsContainer extends Component {
     super(props);
     this.state = {
       comments: [],
-      votes:[],
       signed_in: false
     }
     this.handleUpVote = this.handleUpVote.bind(this);
@@ -18,33 +17,38 @@ class CommentsContainer extends Component {
   }
   handleUpVote(commentId) {
     let newVote = {
-      vote:{
-      up_or_down: 1,
-      comment_id: commentId
+      vote: {
+        up_or_down: 1,
+        comment_id: commentId
+      }
     }
-  }
+   // alert("Button clicked, id "+this+", text"+this.innerHTML);
+  // alert(event.target.getAttribute('data-id'))
+  // alert(event.target.getAttribute('data-id'))
+
     this.vote(newVote)
   }
   handleDownVote(commentId) {
     let newVote = {
       vote: {
-      up_or_down: -1,
-      comment_id: commentId
+        up_or_down: -1,
+        comment_id: commentId
+      }
     }
-  }
+  // alert(event.target.id)
     this.vote(newVote)
   }
  vote(newVote){
-let playerId =this.props.playerId;
-fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
-      credentials: 'same-origin',
-      method: "POST",
-      body: JSON.stringify(newVote),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
+    let playerId =this.props.playerId;
+    fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
+          credentials: 'same-origin',
+          method: "POST",
+          body: JSON.stringify(newVote),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
     .then(response => {
       if (response.ok) {
         return response;
@@ -59,15 +63,15 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
        console.log('body from json', body)
       this.setState({
         comments: body['comments']
-        // votecount: body['votecount'],
-        // votes: body['votes']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
+
  componentDidMount(){
    this.getCommentsData()
  }
+
   getCommentsData(){
     let playerId = this.props.playerId
     fetch(`/api/v1/players/${playerId}/comments`, {
@@ -86,7 +90,6 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     .then(body => {
       this.setState({
         comments: body['comments'],
-        votes: body['votes'],
         signed_in: body['signed_in']
       })
     })
@@ -118,28 +121,32 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
+
   render(){
     let comments = this.state.comments.map( comment => {
      let votecount = 0;
-     if (comment[2]){
-       comment[2].forEach( vote => {
+     let userVote
+     if (comment.votes){
+       comment.votes.forEach( vote => {
            votecount += vote.up_or_down
        })
      }
     console.log('votecount', votecount)
-    let handleUpVote = () => { this.handleUpVote(comment[0].id) }
-    let handleDownVote = () => { this.handleDownVote(comment[0].id) }
+    let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
+    let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
       return (
         <div className="comment-vote">
           <CommentTile
-            id={comment[0].id}
-            key={comment[0].id}
-            body={comment[0].body}
-            username={comment[1]}
-            playerId={comment[0].player_id}
+            id={comment.comment.id}
+            key={comment.comment.id}
+            body={comment.comment.body}
+            username={comment.username}
+            playerId={comment.comment.player_id}
             handleUpVote={handleUpVote}
             handleDownVote={handleDownVote}
             voteCount={votecount}
+            userVote={userVote}
+            commentId={comment.comment.id}
           />
         </div>
       )
