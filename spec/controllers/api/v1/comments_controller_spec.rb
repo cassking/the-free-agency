@@ -45,7 +45,12 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
+<<<<<<< HEAD
       expect(returned_json['comments'][0][0]['body']).to eq 'hi'
+=======
+
+      expect(returned_json['comment.comment']['body']).to eq 'hi'
+>>>>>>> de5461dd3b517357c78b59914d4b8cadb1b3b448
     end
   end
 end
