@@ -6,10 +6,9 @@ class DashboardController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @comments = @user.comments
+    @user.comments.each(&:destroy)
     if_admin = current_user.admin?
     @user.destroy
-    @comments.destroy
     if if_admin
       redirect_to dashboard_index_path, notice: 'User deleted' if @user.destroy
     else

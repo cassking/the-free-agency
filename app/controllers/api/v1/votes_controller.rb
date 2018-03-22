@@ -4,7 +4,7 @@ class Api::V1::VotesController < ApplicationController
   end
 
   def create
-    @vote = Vote.create(vote_params)
+    @vote = Vote.new(vote_params)
     @vote.user = current_user
 
     @dbVote = Vote.where('user_id = ? AND comment_id = ?', @vote.user_id, @vote.comment_id)[0]

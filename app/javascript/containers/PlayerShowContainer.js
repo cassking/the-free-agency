@@ -10,7 +10,8 @@ class PlayerShowContainer extends Component {
       player: {},
       stat: {},
       signed_in: false,
-      team_name: ''
+      team_name: '',
+      team_id: 0
     }
   }
 
@@ -37,12 +38,14 @@ class PlayerShowContainer extends Component {
         player: body['player'],
         stat: body['stat'],
         signed_in: body['signed_in'],
-        team_name: body['team_name']
+        team_name: body['team_name'],
+        team_id: body['team_id']
       })
     })
   }
 
   render() {
+    debugger;
     return(
       <div className="player_show_comments">
       <PlayerShow
@@ -58,6 +61,7 @@ class PlayerShowContainer extends Component {
         position={this.state.player.position}
         team_name={this.state.team_name}
         avatar_url={this.state.player.avatar_url}
+        team_id={this.state.team_id}
       />
       <hr />
       <StatsTile

@@ -9,7 +9,7 @@ const Layout = (props) => {
         <section className="side-bar-section">
           <ul className="top">
             <BackButton />
-            <Link className="button secondary small" to='/teams'> Teams </Link>
+            {props.location.pathname!='/teams' && <Link className="button secondary small" to='/teams'> Teams </Link>}
           </ul>
         </section>
       </nav>

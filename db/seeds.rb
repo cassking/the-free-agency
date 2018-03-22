@@ -11,66 +11,62 @@ Stat.delete_all
 Team.delete_all
 User.delete_all
 
-team1 = Team.create!(
-  name: 'team1',
-  city: 'that place',
-  state: 'that state',
-  logo_url: 'https://i0.wp.com/boxclue.co/wp-content/uploads/2018/01/Kodak-Black-driving-car-meme.png?fit=500%2C566&ssl=1',
-  win: '100',
-  loss: '0',
-  ranking: '1'
-)
+players = ActiveSupport::JSON.decode(File.read('db/seeds/active_players.json'))['activeplayers']['playerentry']
+stats = ActiveSupport::JSON.decode(File.read('db/seeds/player_stats.json'))['player_stats']
+teams = ActiveSupport::JSON.decode(File.read('db/seeds/teams.json'))
 
-team2 = Team.create!(
-  name: 'team2',
-  city: 'that place',
-  state: 'that state',
-  logo_url: 'http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/phi.png',
-  win: '100',
-  loss: '0',
-  ranking: '1'
-)
+teams.each do |team|
+  Team.create!(
+    name: team["last_name"],
+    city: team["city"],
+    state: team["state"],
+    logo_url: "http://i.cdn.turner.com/nba/nba/.element/img/1.0/teamsites/logos/teamlogos_500x500/#{team["abbreviation"]}.png",
+    win: 0,
+    loss: 0,
+    ranking: 0
+  )
+end
+unrostered = Team.create!(name: 'Unrostered', city: 'n/a', state: 'n/a', logo_url: 'http://www.stickpng.com/assets/images/58428defa6515b1e0ad75ab4.png', win: 0, loss: 0, ranking: 0)
 
+players.each do |player|
+  if player['player']['RosterStatus']=='UFA' && player['player']['Height'] && player['player']['Weight']
+    if player['team']
+      if player['team']['Name']
+        team = Team.find_by(name: player['team']['Name'])
+      end
+    else
+      team = unrostered
+    end
+    Player.create!(
+      first_name: player['player']['FirstName'],
+      last_name: player['player']['LastName'],
+      position: player['player']['Position'],
+      height: player['player']['Height'],
+      weight: player['player']['Weight'],
+      birth_city: player['player']['BirthCity'],
+      birth_country: player['player']['BirthCountry'],
+      age: player['player']['Age'],
+      avatar_url: player['player']['officialImageSrc'],
+      team: team
+    )
+  end
+end
 
-james_harden = Player.create!(
-  first_name: "James",
-  last_name: "Harden",
-  avatar_url: "https://specials-images.forbesimg.com/imageserve/5936925ea7ea434078d4c5eb/416x416.jpg?background=000000&cropX1=1335&cropX2=3965&cropY1=104&cropY2=2735",
-  age: "28",
-  height: "6'5",
-  weight: "220",
-  birth_city: "Los Angeles, CA",
-  birth_country: "USA",
-  position: "SG",
-  team: team1
-)
+trash_teams = Team.includes(:players).where(players: { id: nil })
+trash_teams.each do |trash_team|
+  trash_team.delete
+end
 
-Stat.create!(
-  player_id: james_harden.id,
-  ppg: "30",
-  apg: "9.4",
-  rpg: "5"
-)
-
-kevin_durant = Player.create!(
-  first_name: "Kevin",
-  last_name: "Durant",
-  avatar_url: "http://tsnimages.tsn.ca/ImageProvider/PlayerHeadshot?seoId=kevin-durant&width=620&height=620",
-  age: "29",
-  height: "6'9",
-  weight: "240",
-  birth_city: "Washington, D.C.",
-  birth_country: "USA",
-  position: "SF",
-  team: team1
-)
-
-Stat.create!(
-  player_id: kevin_durant.id,
-  ppg: "30",
-  apg: "9.4",
-  rpg: "5"
-)
+stats.each do |player|
+  if Player.find_by(first_name: player['first_name'], last_name: player['last_name'])
+    Stat.create!(
+      player: Player.find_by(first_name: player['first_name'], last_name: player['last_name']),
+      ppg: player['PPG'],
+      apg: player['APG'],
+      rpg: player['RPG']
+    )
+  end
+end
 
 u1 = User.create!(username: "u1",email: "u1@gmail.com", password: "pw1234")
 u2 = User.create!(username: "u2",email: "u2@gmail.com", password: "pw1234")

@@ -155,6 +155,9 @@ class CommentsContainer extends Component {
 
     let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
     let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
+    let handleDelete =() =>{ this.handleDeleteComment(comment.comment.id) }
+    let show = false
+
       return (
         <div className="comment-vote">
           <CommentTile
