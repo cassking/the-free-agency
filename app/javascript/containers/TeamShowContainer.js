@@ -40,6 +40,7 @@ class TeamShowContainer extends Component {
           key={this.state.team.id}
           id={this.state.team.id}
           name={this.state.team.name}
+          logo_url={this.state.team.logo_url}
         />
         {players}
       </div>
