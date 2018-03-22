@@ -9,6 +9,8 @@ import 'whatwg-fetch';
 
 const App = props => {
   return (
+    <div className="container">
+      <div className="row">
     <Router history={browserHistory}>
       <Route path='/' component={Layout}>
         <IndexRoute component={PlayerContainer} />
@@ -18,6 +20,8 @@ const App = props => {
         <Route path="/users/sign_in" />
       </Route>
     </Router>
+  </div>
+</div>
   )
 }
 

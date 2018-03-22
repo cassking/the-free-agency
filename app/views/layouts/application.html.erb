@@ -2,27 +2,20 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- <title>TheFreeAgency</title> -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <title>TheFreeAgency</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
-
     <%= javascript_include_tag "vendor/modernizr" %>
-
-  <%= csrf_meta_tags %> -->
-
-  <!-- <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">TheFreeAgency</a></h1>
-      </li>
-    </ul> -->
+  <%= csrf_meta_tags %>
+  <!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
 
   <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">TheFreeAgency</a>
+      <a class="navbar-brand" href="#">The Free Agency</a>
       <button class="top-bar-section" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span <section class="top-bar-section">
           <ul class="right">
@@ -40,10 +33,6 @@
           </ul>
         </section></span>
       </button>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,8 +40,21 @@
           </div>
       </div>
     </nav>
-    <div
 
+    <!-- <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+    <div>
+
+      <div class="Team Container">
+        <div class="row">
+          <a> href="#/teams/:id"</a>
+          <div class="col-sm-4">First</div>
+          <div class="col-sm-4">Second</div>
+          <div class="col-sm-4">Third</div>
+        </div>
+      </div>
 
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

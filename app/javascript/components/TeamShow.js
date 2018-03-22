@@ -3,7 +3,7 @@ import { browserHistory, Link } from 'react-router';
 
 const TeamShow = (props) => {
   return(
-    <div className="team-show">
+    <div className="team">
       <h2>{props.name}</h2>
       <img src={props.logo_url} />
     </div>

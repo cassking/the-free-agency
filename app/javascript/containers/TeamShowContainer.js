@@ -25,17 +25,19 @@ class TeamShowContainer extends Component {
   render() {
     let players = this.state.players.map(player => {
       return(
+        <div className="Player-show-tile">
         <PlayerTile
           key={player.id}
           id={player.id}
-          first_name={player.firfirst_name}
+          first_name={player.first_name}
           last_name={player.last_name}
           avatar_url={player.avatar_url}
         />
+      </div>
       )
     })
     return(
-      <div>
+      <div className="Team Container">
         <TeamShow
           key={this.state.team.id}
           id={this.state.team.id}

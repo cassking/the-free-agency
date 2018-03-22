@@ -38,6 +38,7 @@ class PlayerContainer extends Component {
   render() {
     let players = this.state.searchedPlayers.map(player => {
       return(
+        <div className="player-tile">
         <PlayerTile
           key={player.id}
           id={player.id}
@@ -45,6 +46,7 @@ class PlayerContainer extends Component {
           last_name={player.last_name}
           avatar_url={player.avatar_url}
         />
+      </div>
       )
     })
     return(

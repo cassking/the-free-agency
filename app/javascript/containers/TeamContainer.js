@@ -23,12 +23,14 @@ class TeamContainer extends Component {
   render() {
     let teams = this.state.teams.map(team => {
       return(
+        <div className="player-tile">
         <TeamTile
           key={team.id}
           id={team.id}
           name={team.name}
           logo_url={team.logo_url}
         />
+      </div>
       )
     })
     return(

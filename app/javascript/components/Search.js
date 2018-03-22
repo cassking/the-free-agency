@@ -9,8 +9,10 @@ class Search extends Component {
       return (
         <div className="row">
           <div className="input-field">
+            <form className="form-inline">
             <label>Search</label>
-            <input id="search" ref="search" name="search" type="text" onKeyUp={this.handleSearch.bind(this)}/>
+            <input className="form-control mr-sm-2" id="search" ref="search" name="search" type="search" placeholder="Search" aria-label="Search" onKeyUp={this.handleSearch.bind(this)}/>
+          </form>
           </div>
         </div>
       )
