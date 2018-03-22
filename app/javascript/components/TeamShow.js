@@ -5,6 +5,7 @@ const TeamShow = (props) => {
   return(
     <div className="team-show">
       <h2>{props.name}</h2>
+      <img src={props.logo_url} />
     </div>
   )
 }
