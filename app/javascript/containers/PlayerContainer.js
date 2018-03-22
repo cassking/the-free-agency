@@ -7,8 +7,11 @@ class PlayerContainer extends Component {
     super(props);
     this.state = {
       searchedPlayers: [],
-      allPlayers: []
+      allPlayers: [],
+      currentPage: 1,
+      playersPerPage: 4
     }
+    this.handleClick = this.handleClick.bind(this);
     this.searchPlayers = this.searchPlayers.bind(this)
   }
 
@@ -34,9 +37,23 @@ class PlayerContainer extends Component {
     } else {
       this.setState({ searchedPlayers: this.state.allPlayers })
     }
- }
+  }
+
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render() {
-    let players = this.state.searchedPlayers.map(player => {
+    const { searchedPlayers, currentPage, playersPerPage } = this.state;
+
+    // Logic for displaying players
+    const indexOfLastPlayer = currentPage * playersPerPage;
+    const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
+    const currentPlayers = searchedPlayers.slice(indexOfFirstPlayer, indexOfLastPlayer);
+
+    const renderPlayers = currentPlayers.map((player, index) => {
       return(
         <PlayerTile
           key={player.id}
@@ -46,13 +63,39 @@ class PlayerContainer extends Component {
           avatar_url={player.avatar_url}
         />
       )
-    })
+    });
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(searchedPlayers.length / playersPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          className="button"
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
+
+
     return(
       <div>
         <div className="search-container">
           <Search searchPlayers={this.searchPlayers}/>
         </div>
-        {players}
+        <ul>
+          {renderPlayers}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
       </div>
     )
   }
