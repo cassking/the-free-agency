@@ -9,7 +9,8 @@ class CommentsContainer extends Component {
       comments: [],
       signed_in: false,
       userVotes: [],
-      if_admin: false
+      if_admin: false,
+      user_id: null
     }
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote= this.handleDownVote.bind(this);
@@ -137,6 +138,7 @@ class CommentsContainer extends Component {
     let if_admin = this.state.if_admin
     let signed_in = this.state.signed_in
     let user_id = this.state.user_id
+
     let comments = this.state.comments.map( comment => {
      let votecount = 0;
      let userVote = 0;

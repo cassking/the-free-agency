@@ -45,7 +45,6 @@ class PlayerShowContainer extends Component {
   }
 
   render() {
-    debugger;
     return(
       <div className="player_show_comments">
       <PlayerShow

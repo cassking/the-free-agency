@@ -3,6 +3,10 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     @signed_in = user_signed_in?
+    if_admin = false
+    if @signed_in
+      if_admin = current_user.admin?
+    end
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|
       comment.created_at
@@ -27,8 +31,11 @@ class Api::V1::CommentsController < ApplicationController
     render json: {
       comments: @comments_with_username,
       signed_in: @signed_in,
-      userVotes: @userVotes
+      userVotes: @userVotes,
+      if_admin: if_admin,
+      user_id: current_user.id
     }
+    binding.pry
   end
 
   def create
