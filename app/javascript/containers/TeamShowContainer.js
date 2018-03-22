@@ -15,7 +15,6 @@ class TeamShowContainer extends Component {
     let teamId = this.props.params.id
     fetch(`/api/v1/teams/${teamId}`)
     .then(response => {
-      console.log(response)
       let parsed = response.json()
       return parsed
     }).then(body => {
@@ -41,6 +40,7 @@ class TeamShowContainer extends Component {
           key={this.state.team.id}
           id={this.state.team.id}
           name={this.state.team.name}
+          logo_url={this.state.team.logo_url}
         />
         {players}
       </div>

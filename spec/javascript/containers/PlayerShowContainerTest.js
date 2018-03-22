@@ -36,7 +36,8 @@ describe('PlayerShowContainer', () => {
        comments: [],
        stat: {},
        signed_in: false,
-       team_name: ""
+       team_name: "",
+       team_id: 0
      })
   });
 
