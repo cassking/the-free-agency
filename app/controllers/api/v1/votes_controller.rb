@@ -6,15 +6,25 @@ class Api::V1::VotesController < ApplicationController
   def create
     @vote = Vote.create(vote_params)
     @vote.user = current_user
-    @comment = Comment.find(params[:comment_id])
-    @votes = @comment.votes
-    @sum = 0
-    @votes.each { |vote| @sum+=vote.up_or_down }
-    @newvote = @votes.map do | voteobject |
-      voteobject
+
+    @dbVote = Vote.where('user_id = ? AND comment_id = ?', @vote.user_id, @vote.comment_id)[0]
+    if @dbVote
+      @dbVote.up_or_down = @vote.up_or_down
+      @dbVote.save
+    else
+      @vote.save
     end
-    binding.pry
-    render json: { votecount: @sum, votes: @votes, vote: @newvote }
+
+    @comments = Comment.where(player_id: params[:player_id])
+    @comments_sorted = @comments.sort_by do |comment|
+      comment.created_at
+    end
+    @comments_sorted.reverse!
+    @comments_with_username = @comments_sorted.map do |comment|
+      [comment, comment.user.username, comment.votes]
+    end
+
+    render json: { comments: @comments_with_username }
   end
 
   def update

@@ -7,7 +7,6 @@ class CommentsContainer extends Component {
     super(props);
     this.state = {
       comments: [],
-      votecount:[],
       votes:[],
       signed_in: false
     }
@@ -19,16 +18,20 @@ class CommentsContainer extends Component {
   }
   handleUpVote(commentId) {
     let newVote = {
-      value: 1,
+      vote:{
+      up_or_down: 1,
       comment_id: commentId
-        }
+    }
+  }
     this.vote(newVote)
   }
   handleDownVote(commentId) {
     let newVote = {
-      value: -1,
+      vote: {
+      up_or_down: -1,
       comment_id: commentId
     }
+  }
     this.vote(newVote)
   }
  vote(newVote){
@@ -55,8 +58,9 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     .then(body => {
        console.log('body from json', body)
       this.setState({
-        votecount: body['votecount'],
-        votes: body['votes']
+        comments: body['comments']
+        // votecount: body['votecount'],
+        // votes: body['votes']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -82,6 +86,7 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     .then(body => {
       this.setState({
         comments: body['comments'],
+        votes: body['votes'],
         signed_in: body['signed_in']
       })
     })
@@ -114,10 +119,14 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   render(){
-    let votecount;
     let comments = this.state.comments.map( comment => {
-    console.log('what is comment[2]', comment[2][0].up_or_down)
-    console.log('what is votecount', this.state.votecount)
+     let votecount = 0;
+     if (comment[2]){
+       comment[2].forEach( vote => {
+           votecount += vote.up_or_down
+       })
+     }
+    console.log('votecount', votecount)
     let handleUpVote = () => { this.handleUpVote(comment[0].id) }
     let handleDownVote = () => { this.handleDownVote(comment[0].id) }
       return (
@@ -130,7 +139,7 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
             playerId={comment[0].player_id}
             handleUpVote={handleUpVote}
             handleDownVote={handleDownVote}
-            voteCount={this.state.votecount}
+            voteCount={votecount}
           />
         </div>
       )

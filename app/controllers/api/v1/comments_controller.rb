@@ -11,13 +11,12 @@ class Api::V1::CommentsController < ApplicationController
     @comments_with_username = @comments_sorted.map do |comment|
       [comment, comment.user.username, comment.votes]
     end
-     @votes =  Vote.where(id: params[:comment_id])
     render json: {
       comments: @comments_with_username,
-      signed_in: @signed_in,
-      votes: @votes
+      signed_in: @signed_in
     }
   end
+
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
@@ -30,10 +29,9 @@ class Api::V1::CommentsController < ApplicationController
       @comments_sorted.reverse!
 
       @comments_with_username = @comments_sorted.map do |comment|
-        [comment, comment.user.username]
+        [comment, comment.user.username, comment.votes]
       end
-      @votes =  Vote.where(id: params[:comment_id])
-      render json: { votes: @votes, comment: @comment, comments: @comments_with_username }
+      render json: { comments: @comments_with_username }
     end
   end
 
