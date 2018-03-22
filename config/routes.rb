@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pages/index'
+#root 'pages/index' ?
   root "static_pages#index"
   devise_for :users
 

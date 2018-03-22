@@ -1,55 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>TheFreeAgency</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <title>TheFreeAgency</title> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <%= javascript_include_tag "vendor/modernizr" %>
 
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <%= csrf_meta_tags %> -->
 
-  <nav class="top-bar">
+  <!-- <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
         <h1><a href="/">TheFreeAgency</a></h1>
       </li>
-    </ul>
+    </ul> -->
+</head>
+<body>
 
-    <section class="top-bar-section">
-      <ul class="right">
-        <%- if current_user -%>
-          <%- if current_user.admin? -%>
-            <li><%= link_to 'Admin Dashboard', dashboard_index_path %></li>
-          <%- else -%>
-            <li><%= link_to 'User Settings', edit_dashboard_path(current_user) %></li>
-          <%- end -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <%- end -%>
-      </ul>
-    </section>
-  </nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <!-- <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
+  <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">TheFreeAgency</a>
+      <button class="top-bar-section" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span <section class="top-bar-section">
+          <ul class="right">
+          <%- if current_user -%>
+            <%- if current_user.admin? -%>
+              <li><%= link_to 'Admin Dashboard', dashboard_index_path %></li>
+                <%- else -%>
+              <li><%= link_to 'User Settings', edit_dashboard_path(current_user) %></li>
+                <%- end -%>
+              <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                <%- else -%>
+              <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+              <li><%= link_to 'Sign In', new_user_session_path %></li>
+            <%- end -%>
+          </ul>
+        </section></span>
+      </button>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            </div>
+          </div>
+      </div>
+    </nav>
+    <div
+
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <!-- <%- flash.each do |key, value| -%>
+      <div class="flash flash-<%= key %>">
+        <%= value %>
+      </div>
+      <%- end -%> -->
+
+      <%= yield %>
     </div>
-  <%- end -%> -->
 
-  <%= yield %>
 
-  <%= javascript_include_tag 'application' %>
-  <%= javascript_pack_tag    'application' %>
-  <%= content_for :extra_footer do %>
-  <script type="text/javascript">
-    var widget = new Something.Widget('foo');
-  </script>
+      <%= javascript_include_tag 'application' %>
+      <%= javascript_pack_tag    'application' %>
+      <%= content_for :extra_footer do %>
+    <script
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </script>
 <% end %>
 </body>
 </html>
