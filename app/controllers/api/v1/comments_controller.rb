@@ -3,7 +3,6 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     @signed_in = user_signed_in?
-    
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|
       comment.created_at
@@ -44,6 +43,20 @@ class Api::V1::CommentsController < ApplicationController
         votes: @comment.votes
       }
       render json: { comment: @comment_return }
+    end
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    player = Player.find(params[:player_id])
+    if comment.destroy
+
+      end
+      @comments_sorted.reverse!
+      @comments_with_username = @comments_sorted.map do |comment|
+        [comment, comment.user.username]
+      end
+      render json: { player: player, comments: @comments_with_username }
     end
   end
 

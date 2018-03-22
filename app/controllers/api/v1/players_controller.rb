@@ -4,7 +4,6 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   def show
-
     @signed_in = user_signed_in?
     if_admin = false
     if @signed_in
@@ -29,20 +28,13 @@ class Api::V1::PlayersController < ApplicationController
       player: @player,
       comments: @comments_with_username,
       stat: @stat,
-<<<<<<< HEAD
       signed_in: @signed_in,
       #add up_down_vote
       team_name: team_name,
-      admin: if_admin,
+      if_admin: if_admin,
       user_id: current_user.id
-=======
-      signed_in: @signed_in
->>>>>>> de5461dd3b517357c78b59914d4b8cadb1b3b448
     }
   end
 
-  def destroy
-    comment=Comment.find(params[:id])
-    comment.destroy
-  end
+
 end

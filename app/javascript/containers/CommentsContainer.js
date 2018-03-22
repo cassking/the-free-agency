@@ -8,7 +8,8 @@ class CommentsContainer extends Component {
     this.state = {
       comments: [],
       signed_in: false,
-      userVotes: []
+      userVotes: [],
+      if_admin: false
     }
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote= this.handleDownVote.bind(this);
@@ -16,15 +17,12 @@ class CommentsContainer extends Component {
     this.getCommentsData = this.getCommentsData.bind(this);
     this.vote = this.vote.bind(this);
     this.handleDeleteComment = this.handleDeleteComment.bind(this);
-
   }
 
   handleDeleteComment(comment_id) {
    console.log("pressed delete key");
    let playerId =this.state.player.id;
    console.log(`/api/v1/players/${playerId}/comments/${comment_id}`);
-
-
    }
 
   handleUpVote(commentId) {
@@ -34,9 +32,6 @@ class CommentsContainer extends Component {
         comment_id: commentId
       }
     }
-   // alert("Button clicked, id "+this+", text"+this.innerHTML);
-  // alert(event.target.getAttribute('data-id'))
-  // alert(event.target.getAttribute('data-id'))
 
     this.vote(newVote)
   }
@@ -47,12 +42,11 @@ class CommentsContainer extends Component {
         comment_id: commentId
       }
     }
-  // alert(event.target.id)
+
     this.vote(newVote)
   }
  vote(newVote){
     let playerId =this.props.playerId;
-   // debugger
     fetch(`/api/v1/players/${playerId}/comments/${newVote.vote.comment_id}/votes`, {
           credentials: 'same-origin',
           method: "POST",
@@ -102,7 +96,6 @@ class CommentsContainer extends Component {
     })
     .then(body => {
       console.log('body from getComments fetch', body);
-      // debugger
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in']
@@ -146,7 +139,7 @@ class CommentsContainer extends Component {
     let signed_in = this.state.signed_in
     let user_id = this.state.user_id
     let comments = this.state.comments.map( comment => {
- // console.log('comment map', comment.comment.id)
+ console.log('comment map', comment.comment.id)
      let votecount = 0;
      let userVote;
      if (comment.votes){

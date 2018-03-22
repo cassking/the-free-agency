@@ -10,7 +10,7 @@ class PlayerShowContainer extends Component {
       player: {},
       stat: {},
       signed_in: false,
-      team_name: '',
+      team_name: ''
     }
   }
 
