@@ -34,7 +34,7 @@ class CommentsContainer extends Component {
     }
     this.vote(newVote)
   }
- vote(newVote){
+  vote(newVote){
     let playerId =this.props.playerId;
     fetch(`/api/v1/players/${playerId}/comments/${newVote.vote.comment_id}/votes`, {
           credentials: 'same-origin',
@@ -133,13 +133,13 @@ class CommentsContainer extends Component {
           votecount += vote.up_or_down
        })
      }
-  if(this.state.userVotes){
-    this.state.userVotes.forEach( vote => {
-       if(vote.comment_id === comment.comment.id){
-         userVote = vote.up_or_down
-       }
-     })
-  }
+    if(this.state.userVotes){
+      this.state.userVotes.forEach( vote => {
+         if(vote.comment_id === comment.comment.id){
+           userVote = vote.up_or_down
+         }
+       })
+    }
 
     let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
     let handleDownVote = () => { this.handleDownVote(comment.comment.id) }

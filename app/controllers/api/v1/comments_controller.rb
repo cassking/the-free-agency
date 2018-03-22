@@ -5,9 +5,13 @@ class Api::V1::CommentsController < ApplicationController
     @signed_in = user_signed_in?
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|
-      comment.created_at
+      sum = 0
+      comment.votes.each do |vote|
+        sum += vote.up_or_down
+      end
+      sum
     end
-    @userVotes =[];
+    @userVotes =[]
     @comments.each do | comment |
       if comment.votes
         comment.votes.each do | vote |
