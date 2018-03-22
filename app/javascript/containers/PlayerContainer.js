@@ -31,8 +31,9 @@ class PlayerContainer extends Component {
   searchPlayers(query){
     if(query){
       let results = this.state.allPlayers.filter((player) => {
-        let full_name = player.first_name + player.last_name
-        return player.last_name.toLowerCase().includes(query) || player.first_name.toLowerCase().includes(query) || full_name.toLowerCase().includes(trim(query))
+        let full_name = player.first_name.split(' ').join('') + player.last_name.split(' ').join('');
+        let stripped_query = query.split(' ').join('');
+        return player.last_name.toLowerCase().includes(stripped_query) || player.first_name.toLowerCase().includes(stripped_query) || full_name.toLowerCase().includes(stripped_query)
       });
       this.setState({ searchedPlayers: results })
     } else {
