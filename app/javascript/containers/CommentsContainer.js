@@ -32,7 +32,6 @@ class CommentsContainer extends Component {
         comment_id: commentId
       }
     }
-
     this.vote(newVote)
   }
   handleDownVote(commentId) {
@@ -42,7 +41,6 @@ class CommentsContainer extends Component {
         comment_id: commentId
       }
     }
-
     this.vote(newVote)
   }
  vote(newVote){
@@ -68,9 +66,9 @@ class CommentsContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        comments: body['comments']
+        comments: body['comments'],
+        userVotes: body['userVotes']
       })
-      console.log("body['comments']", body['comments'])
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
@@ -95,10 +93,11 @@ class CommentsContainer extends Component {
       }
     })
     .then(body => {
-      console.log('body from getComments fetch', body);
+        console.log('body', body)
       this.setState({
         comments: body['comments'],
-        signed_in: body['signed_in']
+        signed_in: body['signed_in'],
+        userVotes: body['userVotes']
       })
     })
   }
@@ -139,23 +138,21 @@ class CommentsContainer extends Component {
     let signed_in = this.state.signed_in
     let user_id = this.state.user_id
     let comments = this.state.comments.map( comment => {
- console.log('comment map', comment.comment.id)
      let votecount = 0;
-     let userVote;
+     let userVote = 0;
      if (comment.votes){
        comment.votes.forEach( vote => {
-           votecount += vote.up_or_down
+          votecount += vote.up_or_down
        })
      }
+  if(this.state.userVotes){
+    this.state.userVotes.forEach( vote => {
+       if(vote.comment_id === comment.comment.id){
+         userVote = vote.up_or_down
+       }
+     })
+  }
 
-     let handleDelete =() =>{ this.handleDeleteComment(comment.comment.id) }
-      let show = false
-      if (if_admin) {
-        show = true
-      } else if (comment.comment.user_id == user_id) {
-        show = true
-      } else {}
-    console.log('votecount', votecount)
     let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
     let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
       return (

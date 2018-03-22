@@ -21,13 +21,10 @@
    margin-left: 4px;
    border: 2px solid #000;
    background-color: #ccc;
-
  }
-
  button.vote.upvoted {
    background-color: green;
  }
-
  button.vote.downvoted {
    background-color: red;
  }

@@ -31,8 +31,7 @@ class Api::V1::PlayersController < ApplicationController
       signed_in: @signed_in,
       #add up_down_vote
       team_name: team_name,
-      if_admin: if_admin,
-      user_id: current_user.id
+      if_admin: if_admin
     }
   end
 
