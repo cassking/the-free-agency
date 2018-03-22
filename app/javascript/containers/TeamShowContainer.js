@@ -7,8 +7,11 @@ class TeamShowContainer extends Component {
     super(props);
     this.state = {
       team: {},
-      players: []
+      players: [],
+      currentPage: 1,
+      playersPerPage: 4
     }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -22,18 +25,51 @@ class TeamShowContainer extends Component {
     })
   }
 
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render() {
-    let players = this.state.players.map(player => {
+    const { players, currentPage, playersPerPage } = this.state;
+
+    // Logic for displaying players
+    const indexOfLastPlayer = currentPage * playersPerPage;
+    const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
+    const currentPlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer);
+
+    const renderPlayers = currentPlayers.map((player, index) => {
       return(
         <PlayerTile
           key={player.id}
           id={player.id}
-          first_name={player.firfirst_name}
+          first_name={player.first_name}
           last_name={player.last_name}
           avatar_url={player.avatar_url}
         />
       )
-    })
+    });
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(players.length / playersPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          className="button"
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
+
     return(
       <div>
         <TeamShow
@@ -42,7 +78,12 @@ class TeamShowContainer extends Component {
           name={this.state.team.name}
           logo_url={this.state.team.logo_url}
         />
-        {players}
+        <ul>
+          {renderPlayers}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
       </div>
     )
   }
