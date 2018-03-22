@@ -12,9 +12,12 @@ class PlayerShowContainer extends Component {
       comments: [],
       stat: {},
       signed_in: false,
-      team_name: ''
+      team_name: '',
+      if_admin: false,
+      selectedComment: null
     }
     this.addNewComment = this.addNewComment.bind(this);
+    this.handleDeleteComment = this.handleDeleteComment.bind(this);
   }
 
 
@@ -45,6 +48,30 @@ class PlayerShowContainer extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  handleDeleteComment(comment_id) {
+    console.log("pressed delete key");
+    let playerId =this.state.player.id;
+    console.log(`/api/v1/players/${playerId}/comments/${comment_id}`);
+
+    fetch(`/api/v1/players/${playerId}/comments/${comment_id}`, {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+    }
+
   componentDidMount() {
     let playerId = this.props.params.id
     fetch(`/api/v1/players/${playerId}`, {
@@ -68,19 +95,31 @@ class PlayerShowContainer extends Component {
         comments: body['comments'],
         stat: body['stat'],
         signed_in: body['signed_in'],
-        team_name: body['team_name']
+        team_name: body['team_name'],
+        if_admin: body['if_admin']
       })
     })
   }
 
   render() {
+
     let comments = this.state.comments.map( comment => {
+
+      let handleDelete =() =>{ this.handleDeleteComment(comment[0].id) }
+      let show = false
+      if (comment[3]) {
+        show = true
+      } else if (comment[0].user_id == comment[4]) {
+        show = true
+      } else {}
       return (
         <CommentTile
           id={comment[0].id}
           key={comment[0].id}
           body={comment[0].body}
           username={comment[1]}
+          handleDelete={handleDelete}
+          show={show}
         />
       )
     })

@@ -14,8 +14,14 @@ class Api::V1::CommentsController < ApplicationController
       @comments_with_username = @comments_sorted.map do |comment|
         [comment, comment.user.username]
       end
-      render json: { comment: @comment, comments: @comments_with_username }
     end
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    player = Player.find(params[:player_id])
+    comment.destroy
+
   end
 
   private
