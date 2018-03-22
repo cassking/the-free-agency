@@ -6,9 +6,7 @@ class DashboardController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.comments.each do |comment|
-      comment.destroy
-    end
+    @user.comments.each(&:destroy)
     if_admin = current_user.admin?
     @user.destroy
     if if_admin
