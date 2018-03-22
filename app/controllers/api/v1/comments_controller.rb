@@ -5,9 +5,13 @@ class Api::V1::CommentsController < ApplicationController
     @signed_in = user_signed_in?
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|
-      comment.created_at
+      sum = 0
+      comment.votes.each do |vote|
+        sum += vote.up_or_down
+      end
+      sum
     end
-    @userVotes =[];
+    @userVotes =[]
     @comments.each do | comment |
       if comment.votes
         comment.votes.each do | vote |
@@ -32,6 +36,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
+    @signed_in = user_signed_in?
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.player = Player.find(params[:player_id])
@@ -41,7 +46,7 @@ class Api::V1::CommentsController < ApplicationController
         username:@comment.user.username,
         votes: @comment.votes
       }
-      render json: { comment: @comment_return }
+      render json: { comment: @comment_return, signed_in: @signed_in }
     end
   end
 
