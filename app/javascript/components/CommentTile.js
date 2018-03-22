@@ -12,6 +12,7 @@ const CommentTile = (props) => {
           onUpVote={props.handleUpVote}
           voteCount={props.voteCount}
           commentId={props.commentId}
+          userVote={props.userVote}
         />
     </div>
   )

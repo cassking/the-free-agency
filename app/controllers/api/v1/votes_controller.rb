@@ -26,8 +26,21 @@ class Api::V1::VotesController < ApplicationController
         votes: comment.votes
       }
     end
+    @userVotes =[];
+    @comments.each do | comment |
+      if comment.votes
+        comment.votes.each do | vote |
+          if (vote.user_id === current_user.id)
+            @userVotes << vote
+          end
+        end
+      end
+    end
 
-    render json: { comments: @comments_with_username }
+    render json: {
+      comments: @comments_with_username,
+      userVotes: @userVotes
+    }
   end
 
   def destroy

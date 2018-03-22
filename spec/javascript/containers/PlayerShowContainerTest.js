@@ -50,7 +50,7 @@ describe('PlayerShowContainer', () => {
     expect(wrapper.find(CommentFormContainer)).toBePresent();
   });
   it('should render a CommentTile Component', () => {
-    wrapper.setState({comments: [[{body: 'hi', id: '1', key: '1', username: 'name'}]]})
+    wrapper.setState({comments: {body: 'hi', id: '1', key: '1', username: 'name'}})
     expect(wrapper.find(CommentTile)).toBePresent();
   });
 });

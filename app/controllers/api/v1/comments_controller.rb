@@ -7,13 +7,6 @@ class Api::V1::CommentsController < ApplicationController
     @comments_sorted = @comments.sort_by do |comment|
       comment.created_at
     end
-    @comments_sorted.reverse!
-    @comments_with_username = @comments_sorted.map do |comment|
-      { comment: comment,
-        username:comment.user.username,
-        votes: comment.votes
-      }
-    end
     @userVotes =[];
     @comments.each do | comment |
       if comment.votes
@@ -22,8 +15,14 @@ class Api::V1::CommentsController < ApplicationController
             @userVotes << vote
           end
         end
+      end
     end
-
+    @comments_sorted.reverse!
+    @comments_with_username = @comments_sorted.map do |comment|
+      { comment: comment,
+        username:comment.user.username,
+        votes: comment.votes
+      }
     end
     render json: {
       comments: @comments_with_username,
