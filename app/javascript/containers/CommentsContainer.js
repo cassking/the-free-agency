@@ -84,7 +84,6 @@ class CommentsContainer extends Component {
       }
     })
     .then(body => {
-        console.log('body', body)
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in'],
@@ -118,7 +117,8 @@ class CommentsContainer extends Component {
       let updatedComments = this.state.comments;
       updatedComments.unshift(body['comment'])
       this.setState({
-        comments: updatedComments
+        comments: updatedComments,
+        signed_in: body['signed_in'],
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));

@@ -36,6 +36,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
+    @signed_in = user_signed_in?
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.player = Player.find(params[:player_id])
@@ -45,7 +46,7 @@ class Api::V1::CommentsController < ApplicationController
         username:@comment.user.username,
         votes: @comment.votes
       }
-      render json: { comment: @comment_return }
+      render json: { comment: @comment_return, signed_in: @signed_in }
     end
   end
 

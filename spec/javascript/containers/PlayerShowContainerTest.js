@@ -28,6 +28,7 @@ describe('PlayerShowContainer', () => {
       return Promise.resolve(response);
     });
     wrapper = shallow(<PlayerShowContainer />);
+    wrapper.setProps()
   });
 
   it('should have the specified intial state', () => {
