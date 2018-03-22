@@ -9,7 +9,7 @@ class Api::V1::CommentsController < ApplicationController
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
-      [comment, comment.user.username]
+      [comment, comment.user.username, comment.votes]
     end
      @votes =  Vote.where(id: params[:comment_id])
     render json: {

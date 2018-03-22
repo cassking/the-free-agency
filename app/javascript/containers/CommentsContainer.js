@@ -7,7 +7,8 @@ class CommentsContainer extends Component {
     super(props);
     this.state = {
       comments: [],
-      userVotes:[],
+      votecount:[],
+      votes:[],
       signed_in: false
     }
     this.handleUpVote = this.handleUpVote.bind(this);
@@ -19,16 +20,14 @@ class CommentsContainer extends Component {
   handleUpVote(commentId) {
     let newVote = {
       value: 1,
-      comment_id: commentId,
-      player_id: this.props.playerId
-    }
+      comment_id: commentId
+        }
     this.vote(newVote)
   }
   handleDownVote(commentId) {
     let newVote = {
       value: -1,
-      comment_id: commentId,
-      player_id: this.props.playerId
+      comment_id: commentId
     }
     this.vote(newVote)
   }
@@ -54,9 +53,11 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     })
     .then(response => response.json())
     .then(body => {
-      // debugger
+       console.log('body from json', body)
       this.setState({
-        userVotes: body['userVotes']
+        votecount: body['votecount'],
+        votes: body['votes'],
+        vote: body['vote']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -83,7 +84,6 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in']
-        // userVotes: body['userVotes']
       })
     })
   }
@@ -115,20 +115,10 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   render(){
+    let votecount;
     let comments = this.state.comments.map( comment => {
-      let voteCount;
-      console.log('vote in map', this.state.userVotes)
-      this.state.userVotes.map( vote => {
-        //return sum of all userVotes.up_or_down = voteCount
-        voteCount = userVotes.push(vote)
-        return(
-          {voteCount}
-        )
-      })
-
-      // determine if there's a vote in state which
-      //matches local commnet.id as well as user
-      //sned that vote down to comment tile
+    console.log('what is comment[2]', comment[2][0].up_or_down)
+    console.log('what is votecount', this.state.votecount)
     let handleUpVote = () => { this.handleUpVote(comment[0].id) }
     let handleDownVote = () => { this.handleDownVote(comment[0].id) }
       return (
@@ -141,7 +131,7 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
             playerId={comment[0].player_id}
             handleUpVote={handleUpVote}
             handleDownVote={handleDownVote}
-            voteCount={voteCount}
+            voteCount={this.state.votecount}
           />
         </div>
       )
@@ -156,10 +146,7 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
       {comments}
     </div>
     )
-
   }
-
-
 }
 
 export default CommentsContainer;

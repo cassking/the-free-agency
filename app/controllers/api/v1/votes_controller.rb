@@ -4,17 +4,14 @@ class Api::V1::VotesController < ApplicationController
   end
 
   def create
-    @comment = Comment.find(params[:comment_id])
     @vote = Vote.create(vote_params)
-    #put binding pry here to check params
+    @vote.user = current_user
+    @comment = Comment.find(params[:comment_id])
     @votes = @comment.votes
-    #return comments & votes
-    @voteCount =[]
-    @votes.map do | vote_value |
-      @voteCount << vote_value
-    end
-      binding.pry
-    render json: {  vote_count: @voteCount }
+    @sum = 0
+    @votes.each { |vote| @sum+=vote.up_or_down }
+    # binding.pry
+    render json: { votecount: @sum, votes: @votes, vote: @vote }
   end
 
   def update

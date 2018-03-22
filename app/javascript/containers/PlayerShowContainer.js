@@ -8,7 +8,8 @@ class PlayerShowContainer extends Component {
     super(props);
     this.state = {
       player: {},
-      stat: {}
+      stat: {},
+      signed_in: false
     }
   }
 
