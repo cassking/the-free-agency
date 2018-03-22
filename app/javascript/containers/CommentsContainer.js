@@ -56,8 +56,7 @@ fetch(`/api/v1/players/${playerId}/comments/${newVote.comment_id}/votes`, {
        console.log('body from json', body)
       this.setState({
         votecount: body['votecount'],
-        votes: body['votes'],
-        vote: body['vote']
+        votes: body['votes']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));

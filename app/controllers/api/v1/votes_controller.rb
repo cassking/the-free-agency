@@ -10,8 +10,11 @@ class Api::V1::VotesController < ApplicationController
     @votes = @comment.votes
     @sum = 0
     @votes.each { |vote| @sum+=vote.up_or_down }
-    # binding.pry
-    render json: { votecount: @sum, votes: @votes, vote: @vote }
+    @newvote = @votes.map do | voteobject |
+      voteobject
+    end
+    binding.pry
+    render json: { votecount: @sum, votes: @votes, vote: @newvote }
   end
 
   def update
