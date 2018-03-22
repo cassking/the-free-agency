@@ -9,13 +9,16 @@ const PlayerShow = (props) => {
           <img src={props.avatar_url}></img>
       </div>
       <div className = "player-info">
-        <p>age: {props.age}</p>
-        <p>height: {props.height}</p>
-        <p>weight: {props.weight}</p>
-        <p>birth_city: {props.birth_city}</p>
-        <p>birth_country: {props.birth_country}</p>
-        <p>position: {props.position}</p>
-        <p>team: {props.team_name}</p>
+        <p>Age: {props.age}</p>
+        <p>Height: {props.height}</p>
+        <p>Weight: {props.weight}</p>
+        <p>Birth City: {props.birth_city}</p>
+        <p>Birth Country: {props.birth_country}</p>
+        <p>Position: {props.position}</p>
+        <Link to={`/teams/${props.team_id}`}>
+          Team: {props.team_name}
+        </Link>
+
       </div>
     </div>
   )

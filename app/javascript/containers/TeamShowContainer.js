@@ -15,7 +15,6 @@ class TeamShowContainer extends Component {
     let teamId = this.props.params.id
     fetch(`/api/v1/teams/${teamId}`)
     .then(response => {
-      console.log(response)
       let parsed = response.json()
       return parsed
     }).then(body => {
