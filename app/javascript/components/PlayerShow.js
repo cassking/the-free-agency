@@ -15,9 +15,9 @@ const PlayerShow = (props) => {
         <p>Birth City: {props.birth_city}</p>
         <p>Birth Country: {props.birth_country}</p>
         <p>Position: {props.position}</p>
-        <Link to={`/teams/${props.team_id}`}>
-          Team: {props.team_name}
-        </Link>
+        <p>Team: <Link to={`/teams/${props.team_id}`}>
+          {props.team_name}
+        </Link></p>
 
       </div>
     </div>
