@@ -37,16 +37,12 @@ class Api::V1::CommentsController < ApplicationController
     @comment.user = current_user
     @comment.player = Player.find(params[:player_id])
     if @comment.save
-      @comments = Comment.where(player_id: params[:player_id])
-      @comments_sorted = @comments.sort_by do |comment|
-        comment.created_at
-      end
-      @comments_sorted.reverse!
-
-      @comments_with_username = @comments_sorted.map do |comment|
-        [comment, comment.user.username, comment.votes]
-      end
-      render json: { comments: @comments_with_username }
+      @comment_return = {
+        comment: @comment,
+        username:@comment.user.username,
+        votes: @comment.votes
+      }
+      render json: { comment: @comment_return }
     end
   end
 

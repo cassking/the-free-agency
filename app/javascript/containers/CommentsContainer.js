@@ -41,7 +41,7 @@ class CommentsContainer extends Component {
   }
  vote(newVote){
     let playerId =this.props.playerId;
-  // debugger
+   // debugger
     fetch(`/api/v1/players/${playerId}/comments/${newVote.vote.comment_id}/votes`, {
           credentials: 'same-origin',
           method: "POST",
@@ -62,11 +62,10 @@ class CommentsContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-       // console.log('body from json', body)
       this.setState({
         comments: body['comments']
       })
-      console.log('body from json', body['comments'])
+      console.log("body['comments']", body['comments'])
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
@@ -91,6 +90,8 @@ class CommentsContainer extends Component {
       }
     })
     .then(body => {
+      console.log('body from getComments fetch', body);
+      // debugger
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in']
@@ -100,7 +101,6 @@ class CommentsContainer extends Component {
 
   addNewComment(formPayload) {
     let playerId = this.props.playerId
-    debugger
     fetch(`/api/v1/players/${playerId}/comments`, {
       method: 'POST',
       body: JSON.stringify(formPayload),
@@ -121,8 +121,10 @@ class CommentsContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
+      let updatedComments = this.state.comments;
+      updatedComments.unshift(body['comment'])
       this.setState({
-        comments: body['comments']
+        comments: updatedComments
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
