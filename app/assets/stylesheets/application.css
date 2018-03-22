@@ -15,3 +15,10 @@
  *= require foundation_and_overrides
 
  */
+ button.vote {
+   display: inline-block;
+   border-radius: 7px;
+   margin-left: 4px;
+   border: 2px solid #000;
+
+ }
