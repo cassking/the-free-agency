@@ -15,4 +15,5 @@ add_filter 'app/controllers/users/unlocks_controller.rb'
 add_filter 'app/controllers/users/confirmations_controller.rb'
 add_filter 'app/controllers/users/passwords_controller.rb'
 add_filter 'app/helpers/application_helper.rb'
+add_filter 'app/controllers/homes_controller.rb'
 end
