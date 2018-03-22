@@ -20,7 +20,9 @@ describe('TeamContainer', () => {
 
   it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
-       teams: []
+       teams: [],
+       currentPage: 1,
+       teamsPerPage: 4
      })
   });
 
