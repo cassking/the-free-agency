@@ -34,6 +34,4 @@ class Api::V1::PlayersController < ApplicationController
       team_id: team_id
     }
   end
-
-
 end

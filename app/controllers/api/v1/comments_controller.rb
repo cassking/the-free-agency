@@ -82,9 +82,9 @@ class Api::V1::CommentsController < ApplicationController
     if deleted_comment.destroy
       @comment_return = {
         comments: @comments_with_username,
-        userVotes: @userVotes,
+        userVotes: @userVotes
       }
-      render json: { comment: @comment_return}
+      render json: { comment: @comment_return }
     end
   end
 

@@ -24,9 +24,7 @@ class CommentsContainer extends Component {
   }
 
   handleDeleteComment(comment_id) {
-   console.log("pressed delete key");
    let playerId =this.props.playerId;
-   console.log(`/api/v1/players/${playerId}/comments/${comment_id}`)
    fetch(`/api/v1/players/${playerId}/comments/${comment_id}`, {
      method: 'DELETE',
         credentials: 'same-origin',
