@@ -9,9 +9,9 @@ class Api::V1::VotesController < ApplicationController
     @dbVote = Vote.where(['user_id = ? AND comment_id = ?', @vote.user_id, @vote.comment_id])[0]
     if @dbVote
       @dbVote.up_or_down = @vote.up_or_down
-       @dbVote.save
+      @dbVote.save
     else
-       @vote.save
+      @vote.save
     end
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|

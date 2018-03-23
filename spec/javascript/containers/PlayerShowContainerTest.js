@@ -30,11 +30,7 @@ describe('PlayerShowContainer', () => {
       });
       return Promise.resolve(response);
     });
-<<<<<<< HEAD
-=======
     wrapper = shallow(<PlayerShowContainer />);
-
->>>>>>> b03fe1d1d036d8110b87be639bab30a736b8bd76
   });
 
   it('should have the specified intial state', () => {
