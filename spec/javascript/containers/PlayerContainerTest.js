@@ -27,7 +27,9 @@ describe('PlayerContainer', () => {
   it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
        searchedPlayers: [],
-       allPlayers: []
+       allPlayers: [],
+       currentPage: 1,
+       playersPerPage: 4
      })
   });
 

@@ -6,8 +6,11 @@ class TeamContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teams: []
+      teams: [],
+      currentPage: 1,
+      teamsPerPage: 4
     }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -20,8 +23,21 @@ class TeamContainer extends Component {
     })
   }
 
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render() {
-    let teams = this.state.teams.map(team => {
+    const { teams, currentPage, teamsPerPage } = this.state;
+
+    // Logic for displaying players
+    const indexOfLastTeam = currentPage * teamsPerPage;
+    const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
+    const currentTeams = teams.slice(indexOfFirstTeam, indexOfLastTeam);
+
+    const renderTeams = currentTeams.map((team, index) => {
       return(
         <div className="player-tile">
         <TeamTile
@@ -32,10 +48,35 @@ class TeamContainer extends Component {
         />
       </div>
       )
-    })
+    });
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(teams.length / teamsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          className="button"
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
+
     return(
       <div>
-        {teams}
+        <ul>
+          {renderTeams}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
       </div>
     )
   }

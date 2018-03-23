@@ -85,7 +85,7 @@ RSpec.describe Api::V1::PlayersController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json')
       expect(returned_json['comments'].length).to eq 1
-      expect(returned_json['comments'][0][0]['body']).to eq 'This is a comment on Kevin Durant.'
+      expect(returned_json['comments'][0]['comment']['body']).to eq "This is a comment on Kevin Durant."
     end
   end
 end

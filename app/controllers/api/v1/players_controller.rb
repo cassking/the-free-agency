@@ -12,7 +12,11 @@ class Api::V1::PlayersController < ApplicationController
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
-      [comment, comment.user.username]
+      {
+        comment: comment,
+        username:comment.user.username,
+        votes: comment.votes
+      }
     end
     @stat = Stat.find_by(player_id: params[:id])
     team_name = @player.team.name
