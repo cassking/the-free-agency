@@ -15,6 +15,162 @@
  *= require foundation_and_overrides
 
  */
+ body {
+   padding:0;
+   font-family: "Titillium Web",Arial,sans-serif;
+   font-size: 16px;
+   line-height: 1.5;
+   color: #2b2b2b;
+   background-color: #fff;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased
+ }
+ h1,h2,h3,h4 {
+   font-family: "Titillium Web",Arial,sans-serif;
+   font-weight: 900;
+ }
+ .app-main-container {
+   margin-top: -22px;
+ }
+
+
+ .top-bar {
+  height: 75px;
+  padding: 10px;
+ }
+ .top-bar .name h1 a,
+  .top-bar .name h1 a:hover,
+   .top-bar .name h1 a:focus {
+   font-size: 40px;
+   font-family: "Titillium Web",Arial,sans-serif;
+   font-weight: 900;
+   text-decoration: none;
+ }
+ .top-bar .name h1 a:hover,
+  .top-bar .name h1 a:focus {
+    opacity: 0.7;
+  }
+ .top-bar-section ul {
+   margin-right: 20px;
+ }
+ .top-bar-section ul li {
+   float:none;
+   display: inline-block;
+   background: none;
+   text-align: center;
+ }
+ .top-bar-section .right li a,
+ .top-bar-section li:not(.has-form) a:not(.button) {
+  background-color: #ea5b0c;
+  border-radius: 5px;
+  font-family: "Titillium Web",Arial,sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  line-height:2;
+  margin: 10px;
+ }
+ a {
+   font-family: "Titillium Web",Arial,sans-serif;
+   color: #ea5b0c;
+   text-decoration: none
+ }
+
+ a:hover,a:focus {
+   color:#ea5b0c;
+   text-decoration: underline
+ }
+
+ a:focus {
+   outline: thin dotted;
+   outline: 5px auto -webkit-focus-ring-color;
+   outline-offset: -2px
+ }
+ .side-bar-section {
+   border: 1px solid red;
+   text-align: left;
+   display: inline-block;
+
+ }
+ #back-button {
+   text-transform: uppercase;
+   width:125px;
+   line-height:1.4;
+   border-radius: 10px;
+   font-family: "Titillium Web",Arial,sans-serif;
+  font-weight: 600;
+  background-color: #ea5b0c;
+ }
+ .button.secondary.small {
+   text-transform: uppercase;
+   border-radius: 10px;
+   width:125px;
+    line-height:1.4;
+   font-family: "Titillium Web",Arial,sans-serif;
+    font-weight: 600;
+    background-color: #000;
+    color: #ea5b0c;
+ }
+  .side-bar-section ul.top .back-button,
+  .side-bar-section a.button.secondary.small {
+    display:inline-block;
+    border-radius: 10px;
+    font-size: 0.8125rem;
+    line-height:2;
+    padding:5px 10px;
+  }
+  .side-bar-section ul.top #back-button {
+      padding:5px 10px;
+      border: 2px solid #000;
+  }
+ #page-numbers li.button {
+   display:inline-block;
+   box-sizing: content-box;
+   width: 11px;
+   line-height: 26px;
+   background-color: #ea5b0c;
+   border-radius: 30px;
+   margin-right: 4px;
+   padding:8px 16px;
+   font-family: "Titillium ",Arial,sans-serif;
+  font-weight: 900;
+  border: 3px solid #000;
+
+ }
+ .main-wrapper{
+   position: relative;
+   margin: 0 auto;
+   text-align: center;
+
+ }
+ .players-wrapper{
+   position: relative;
+   margin: 0 auto;
+   border: 1px solid blue;
+ }
+ .search-wrapper{
+   width: 80%;
+   padding:0;
+   display: inline-block;
+   position: relative;
+   border: 1px solid blue;
+
+ }
+.search-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.search-container .input-field {
+  border-radius: 4px;
+}
+ .search-container .input-field label {
+   font-family: "Titillium Web",Arial,sans-serif;
+    font-weight: 900;
+    color: #ea5b0c;
+    font-size: 16px;
+ }
+
  button.vote{
    display: inline-block;
    border-radius: 7px;
@@ -28,3 +184,84 @@
  button.vote.downvoted {
    background-color: red;
  }
+
+ img {
+   max-width: 100%;
+   vertical-align: middle
+ }
+ input[type=text],input[type=email],textarea {
+   font-family: "Titillium Web",Arial,sans-serif;
+   font-size: 12px;
+   border-color: #000;
+   border-width: 1px
+ }
+
+ input[type=text]:focus,input[type=email]:focus,textarea:focus {
+   outline: 0
+ }
+
+ input[type=password] {
+   font-family: "Titillium Web",Arial,sans-serif;
+   font-size: 12px
+ }
+.player-tile {
+  vertical-align: top;
+  min-width: 300px;
+  display: inline-block;
+  background-color: #ea5b0c;
+  width: 30%;
+  margin: 1%;
+  border: 3px solid #000;
+  border-radius: 4px;
+  padding: 6px;
+  text-align: center;
+
+}
+.player-tile h4 {
+  font-family: "Titillium Web",Arial,sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff;
+}
+.player-tile img {
+  max-width: 100%;
+  height:auto;
+  border-radius: 4px;
+  border: 3px solid #fff;
+  background-color: #fff;
+}
+.player-tile a {
+  color: #fff;
+}
+
+.player-info {
+  border: 3px solid #ea5b0c;
+  border-radius: 4px;
+}
+
+.player-name img {
+  display: inline-block;
+  border-radius: 4px;
+  border: 3px solid #ea5b0c;
+  height: 250px;
+  width: 250px;
+  background-color: black;
+}
+.team-tile {
+  display: inline-block;
+  background-color: #000;
+  width: 30%;
+  margin: 1%;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  padding: 6px;
+  text-align: center;
+}
+.team img {
+  display: inline-block;
+  border-radius: 4px;
+  border: 3px solid #ea5b0c;
+  height: 250px;
+  width: 250px;
+  background-color: black;
+}

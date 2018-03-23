@@ -57,13 +57,15 @@ class PlayerContainer extends Component {
 
     const renderPlayers = currentPlayers.map((player, index) => {
       return(
-        <PlayerTile
-          key={player.id}
-          id={player.id}
-          first_name={player.first_name}
-          last_name={player.last_name}
-          avatar_url={player.avatar_url}
-        />
+        <div className="player-tile">
+          <PlayerTile
+            key={player.id}
+            id={player.id}
+            first_name={player.first_name}
+            last_name={player.last_name}
+            avatar_url={player.avatar_url}
+          />
+        </div>
       )
     });
 
@@ -88,10 +90,13 @@ class PlayerContainer extends Component {
 
 
     return(
-      <div>
+      <div className="main-wrapper">
+      <div className="search-wrapper">
         <div className="search-container">
           <Search searchPlayers={this.searchPlayers}/>
         </div>
+      </div>
+      <div className="players-wrapper">
         <ul>
           {renderPlayers}
         </ul>
@@ -99,6 +104,8 @@ class PlayerContainer extends Component {
           {renderPageNumbers}
         </ul>
       </div>
+      </div>
+
     )
   }
 
