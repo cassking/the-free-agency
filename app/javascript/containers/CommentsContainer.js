@@ -9,9 +9,12 @@ class CommentsContainer extends Component {
       comments: [],
       signed_in: false,
       userVotes: [],
+      currentPage: 1,
+      commentsPerPage: 4,
       if_admin: false,
       user_id: null
     }
+    this.handleClick = this.handleClick.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote= this.handleDownVote.bind(this);
     this.addNewComment = this.addNewComment.bind(this);
@@ -22,9 +25,33 @@ class CommentsContainer extends Component {
 
   handleDeleteComment(comment_id) {
    console.log("pressed delete key");
-   let playerId =this.state.player.id;
-   console.log(`/api/v1/players/${playerId}/comments/${comment_id}`);
-   }
+   let playerId =this.props.playerId;
+   console.log(`/api/v1/players/${playerId}/comments/${comment_id}`)
+   fetch(`/api/v1/players/${playerId}/comments/${comment_id}`, {
+     method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+   .then(response => {
+     if (response.ok) {
+       return response;
+     } else {
+       let errorMessage = `${response.status} (${response.statusText})`,
+       error = new Error(errorMessage);
+       throw(error);
+     }
+   })
+   .then(response => response.json())
+   .then(body => {
+     this.setState({
+       comments: body['comment']['comments'],
+       userVotes: body['comment']['userVotes']
+     })
+   })
+  }
 
   handleUpVote(commentId) {
     let newVote = {
@@ -35,6 +62,7 @@ class CommentsContainer extends Component {
     }
     this.vote(newVote)
   }
+
   handleDownVote(commentId) {
     let newVote = {
       vote: {
@@ -44,7 +72,8 @@ class CommentsContainer extends Component {
     }
     this.vote(newVote)
   }
- vote(newVote){
+
+  vote(newVote){
     let playerId =this.props.playerId;
     fetch(`/api/v1/players/${playerId}/comments/${newVote.vote.comment_id}/votes`, {
           credentials: 'same-origin',
@@ -94,11 +123,13 @@ class CommentsContainer extends Component {
       }
     })
     .then(body => {
-        console.log('body', body)
+
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in'],
-        userVotes: body['userVotes']
+        userVotes: body['userVotes'],
+        if_admin: body['if_admin'],
+        user_id: body['user_id']
       })
     })
   }
@@ -128,39 +159,54 @@ class CommentsContainer extends Component {
       let updatedComments = this.state.comments;
       updatedComments.unshift(body['comment'])
       this.setState({
-        comments: updatedComments
+        comments: updatedComments,
+        signed_in: body['signed_in']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render(){
+    const { comments, currentPage, commentsPerPage } = this.state;
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
     let if_admin = this.state.if_admin
     let signed_in = this.state.signed_in
     let user_id = this.state.user_id
+    const renderComments = currentComments.map((comment, index) => {
 
-    let comments = this.state.comments.map( comment => {
-     let votecount = 0;
-     let userVote = 0;
-     if (comment.votes){
-       comment.votes.forEach( vote => {
-          votecount += vote.up_or_down
-       })
+      let votecount = 0;
+      let userVote = 0;
+      let handleDelete =() =>{ this.handleDeleteComment(comment.comment.id) }
+      let show = false
+      if (if_admin) {
+        show = true
+      } else if (user_id == comment.comment.user_id) {
+        show = true
+      } else {}
+      if (comment.votes){
+        comment.votes.forEach( vote => {
+           votecount += vote.up_or_down
+        })
+      }
+     if(this.state.userVotes){
+       this.state.userVotes.forEach( vote => {
+          if(vote.comment_id === comment.comment.id){
+            userVote = vote.up_or_down
+          }
+        })
      }
-  if(this.state.userVotes){
-    this.state.userVotes.forEach( vote => {
-       if(vote.comment_id === comment.comment.id){
-         userVote = vote.up_or_down
-       }
-     })
-  }
+     let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
+     let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
 
-    let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
-    let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
-    let handleDelete =() =>{ this.handleDeleteComment(comment.comment.id) }
-    let show = false
-
-      return (
+       return (
         <div className="comment-vote">
           <CommentTile
             id={comment.comment.id}
@@ -178,16 +224,40 @@ class CommentsContainer extends Component {
           />
         </div>
       )
-    })
+    });
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(comments.length / commentsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          className="button"
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
 
     return(
       <div className="comments-container">
-      <CommentFormContainer
-        addNewComment={this.addNewComment}
-        signed_in={this.state.signed_in}
-      />
-      {comments}
-    </div>
+        <CommentFormContainer
+          addNewComment={this.addNewComment}
+          signed_in={this.state.signed_in}
+        />
+        <ul>
+          {renderComments}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
+      </div>
     )
   }
 }

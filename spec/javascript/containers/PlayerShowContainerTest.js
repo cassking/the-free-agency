@@ -17,9 +17,12 @@ describe('PlayerShowContainer', () => {
   let stat1 = {ppg: '30', rpg: '5', apg: '9.4'}
   let comments = [{body: 'hi', id: '1', key: '1', username: 'name'}]
   let signed_in = {signed_in: false}
+  let team_name = {team_name: 'team1'}
+  let team_id = {team_id: 1}
+  let params = {params: {id: 1}}
   beforeEach(() => {
     spyOn(global, 'fetch').and.callFake(() => {
-      let responseBody = JSON.stringify({player1, comments, stat1, signed_in});
+      let responseBody = JSON.stringify({player1, comments, stat1, signed_in, team_name, team_id});
       let response = new Response(responseBody, {
         status: '200',
         statusText: 'OK',
@@ -27,6 +30,11 @@ describe('PlayerShowContainer', () => {
       });
       return Promise.resolve(response);
     });
+<<<<<<< HEAD
+=======
+    wrapper = shallow(<PlayerShowContainer />);
+
+>>>>>>> b03fe1d1d036d8110b87be639bab30a736b8bd76
   });
 
   it('should have the specified intial state', () => {

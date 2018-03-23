@@ -5,19 +5,21 @@ class Api::V1::VotesController < ApplicationController
 
   def create
     @vote = Vote.new(vote_params)
-    @vote.user = current_user
+     @vote.user = current_user
+    @dbVote = Vote.where(['user_id = ? AND comment_id = ?', @vote.user_id, @vote.comment_id])[0]
 
-    @dbVote = Vote.where('user_id = ? AND comment_id = ?', @vote.user_id, @vote.comment_id)[0]
-    if @dbVote
-      @dbVote.up_or_down = @vote.up_or_down
-      @dbVote.save
-    else
-      @vote.save
-    end
+     if @dbVote
+       @dbVote.up_or_down = @vote.up_or_down
+       @dbVote.save
+     else
+       @vote.save
+     end
 
     @comments = Comment.where(player_id: params[:player_id])
     @comments_sorted = @comments.sort_by do |comment|
-      comment.created_at
+      sum = 0
+      comment.votes.each { |vote| sum += vote.up_or_down }
+      sum
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
@@ -30,13 +32,10 @@ class Api::V1::VotesController < ApplicationController
     @comments.each do | comment |
       if comment.votes
         comment.votes.each do | vote |
-          if (vote.user_id === current_user.id)
-            @userVotes << vote
-          end
+          @userVotes << vote if (vote.user_id === current_user.id)
         end
       end
     end
-
     render json: {
       comments: @comments_with_username,
       userVotes: @userVotes
@@ -50,7 +49,6 @@ class Api::V1::VotesController < ApplicationController
   private
   def vote_params
     params.require(:vote).permit(
-      :user_id,
       :comment_id,
       :up_or_down
     )

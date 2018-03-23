@@ -8,18 +8,19 @@ class Api::V1::CommentsController < ApplicationController
       if_admin = current_user.admin?
     end
     @comments = Comment.where(player_id: params[:player_id])
-    @comments_sorted = @comments.sort_by do |comment|
-      comment.created_at
-    end
-    @userVotes =[];
+    @userVotes = []
     @comments.each do | comment |
       if comment.votes
         comment.votes.each do | vote |
-          if (vote.user_id === current_user.id)
-            @userVotes << vote
-          end
+          @userVotes << vote if (vote.user_id === current_user.id)
         end
       end
+    end
+
+    @comments_sorted = @comments.sort_by do |comment|
+      sum = 0
+      comment.votes.each { |vote| sum += vote.up_or_down }
+      sum
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
@@ -28,6 +29,7 @@ class Api::V1::CommentsController < ApplicationController
         votes: comment.votes
       }
     end
+    @signed_in = user_signed_in?
     render json: {
       comments: @comments_with_username,
       signed_in: @signed_in,
@@ -35,10 +37,10 @@ class Api::V1::CommentsController < ApplicationController
       if_admin: if_admin,
       user_id: current_user.id
     }
-    binding.pry
   end
 
   def create
+    @signed_in = user_signed_in?
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.player = Player.find(params[:player_id])
@@ -48,20 +50,42 @@ class Api::V1::CommentsController < ApplicationController
         username:@comment.user.username,
         votes: @comment.votes
       }
-      render json: { comment: @comment_return }
+      render json: { comment: @comment_return, signed_in: @signed_in }
     end
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    player = Player.find(params[:player_id])
-    if comment.destroy
+    deleted_comment = Comment.find(params[:id])
+    deleted_comment.destroy
+    @comments = Comment.where(player_id: params[:player_id])
+    @userVotes = []
+    @comments.each do | comment |
+      if comment.votes
+        comment.votes.each do | vote |
+          @userVotes << vote if (vote.user_id === current_user.id)
+        end
+      end
+    end
+
+    @comments_sorted = @comments.sort_by do |comment|
+      sum = 0
+      comment.votes.each { |vote| sum += vote.up_or_down }
+      sum
     end
     @comments_sorted.reverse!
     @comments_with_username = @comments_sorted.map do |comment|
-      [comment, comment.user.username]
+      { comment: comment,
+        username:current_user.username,
+        votes: comment.votes
+      }
     end
-    render json: { player: player, comments: @comments_with_username }
+    if deleted_comment.destroy
+      @comment_return = {
+        comments: @comments_with_username,
+        userVotes: @userVotes,
+      }
+      render json: { comment: @comment_return}
+    end
   end
 
   private
