@@ -24,7 +24,7 @@ const VoteTile = props => {
         <span className={`vote ` + downVoteClass}>&#10507;</span>
 
         </button>
-      <p>vote count: {props.voteCount}</p>
+      <p className="count">vote count: {props.voteCount}</p>
     </div>
   )
 }

@@ -9,15 +9,15 @@ import 'whatwg-fetch';
 
 const App = props => {
   return (
-    <Router history={browserHistory}>
-      <Route path='/' component={Layout}>
-        <IndexRoute component={PlayerContainer} />
-        <Route path="players/:id" component={PlayerShowContainer} />
-        <Route path="/teams" component={TeamContainer} />
-        <Route path="/teams/:id" component={TeamShowContainer} />
-        <Route path="/users/sign_in" />
-      </Route>
-    </Router>
+      <Router history={browserHistory}>
+        <Route path='/' component={Layout}>
+          <IndexRoute component={PlayerContainer} />
+          <Route path="players/:id" component={PlayerShowContainer} />
+          <Route path="/teams" component={TeamContainer} />
+          <Route path="/teams/:id" component={TeamShowContainer} />
+          <Route path="/users/sign_in" />
+        </Route>
+      </Router>
   )
 }
 

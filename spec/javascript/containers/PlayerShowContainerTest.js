@@ -31,17 +31,14 @@ describe('PlayerShowContainer', () => {
       return Promise.resolve(response);
     });
     wrapper = shallow(<PlayerShowContainer />);
-
   });
 
   it('should have the specified intial state', () => {
      expect(wrapper.state()).toEqual({
        player: {},
-       comments: [],
        stat: {},
        signed_in: false,
-       team_name: "",
-       team_id: 0
+       team_name: ''
      })
   });
 
@@ -51,13 +48,5 @@ describe('PlayerShowContainer', () => {
 
   it('should render a Stats Component', () => {
     expect(wrapper.find(StatsTile)).toBePresent();
-  });
-  it('should render a CommentFormContainer Component', () => {
-    wrapper.setState({signed_in: true})
-    expect(wrapper.find(CommentFormContainer)).toBePresent();
-  });
-  it('should render a CommentTile Component', () => {
-    wrapper.setState({comments: {body: 'hi', id: '1', key: '1', username: 'name'}})
-    expect(wrapper.find(CommentTile)).toBePresent();
   });
 });

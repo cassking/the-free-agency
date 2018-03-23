@@ -41,6 +41,7 @@ class TeamShowContainer extends Component {
 
     const renderPlayers = currentPlayers.map((player, index) => {
       return(
+        <div className= "players-on-team-show">
         <PlayerTile
           key={player.id}
           id={player.id}
@@ -48,6 +49,7 @@ class TeamShowContainer extends Component {
           last_name={player.last_name}
           avatar_url={player.avatar_url}
         />
+      </div>
       )
     });
 
@@ -71,16 +73,20 @@ class TeamShowContainer extends Component {
     });
 
     return(
-      <div>
+      <div className="main-wrapper">
+        <div className="team-on-team-show">
         <TeamShow
           key={this.state.team.id}
           id={this.state.team.id}
           name={this.state.team.name}
           logo_url={this.state.team.logo_url}
         />
-        <ul>
-          {renderPlayers}
-        </ul>
+      </div>
+        <div className="players-team-show-wrapper">
+          <ul>
+            {renderPlayers}
+          </ul>
+        </div>
         <ul id="page-numbers">
           {renderPageNumbers}
         </ul>
