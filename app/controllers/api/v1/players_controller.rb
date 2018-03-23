@@ -6,9 +6,7 @@ class Api::V1::PlayersController < ApplicationController
   def show
     @signed_in = user_signed_in?
     if_admin = false
-    if @signed_in
-      if_admin = current_user.admin?
-    end
+    if_admin = current_user.admin? if @signed_in
     @player= Player.find(params[:id])
     @comments = Comment.where(player_id: params[:id])
     @comments_sorted = @comments.sort_by do |comment|

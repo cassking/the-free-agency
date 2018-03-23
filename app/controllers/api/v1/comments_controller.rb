@@ -4,9 +4,7 @@ class Api::V1::CommentsController < ApplicationController
   def index
     @signed_in = user_signed_in?
     if_admin = false
-    if @signed_in
-      if_admin = current_user.admin?
-    end
+    if_admin = current_user.admin? if @signed_in
     @comments = Comment.where(player_id: params[:player_id])
     @userVotes = []
     @comments.each do | comment |
