@@ -46,6 +46,7 @@ class PlayerShowContainer extends Component {
 
   render() {
     return(
+      <div className="main-wrapper">
       <div className="player_show_comments">
       <PlayerShow
         key={this.state.player.id}
@@ -75,6 +76,7 @@ class PlayerShowContainer extends Component {
           playerId={this.props.params.id}
         />
     </div>
+  </div>
     )
   }
 }
