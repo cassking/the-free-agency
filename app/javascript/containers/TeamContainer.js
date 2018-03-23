@@ -39,12 +39,14 @@ class TeamContainer extends Component {
 
     const renderTeams = currentTeams.map((team, index) => {
       return(
+        <div className="team-tile">
         <TeamTile
           key={team.id}
           id={team.id}
           name={team.name}
           logo_url={team.logo_url}
         />
+      </div>
       )
     });
 
@@ -68,7 +70,8 @@ class TeamContainer extends Component {
     });
 
     return(
-      <div>
+      <div className="main-wrapper">
+      <div className="teams-wrapper">
         <ul>
           {renderTeams}
         </ul>
@@ -76,6 +79,8 @@ class TeamContainer extends Component {
           {renderPageNumbers}
         </ul>
       </div>
+    </div>
+
     )
   }
 }
