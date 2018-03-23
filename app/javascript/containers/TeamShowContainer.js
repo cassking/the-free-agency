@@ -73,7 +73,7 @@ class TeamShowContainer extends Component {
     });
 
     return(
-      <div>
+      <div className="main-wrapper">
         <div className="team-on-team-show">
         <TeamShow
           key={this.state.team.id}
