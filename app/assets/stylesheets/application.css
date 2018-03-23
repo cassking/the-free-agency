@@ -154,8 +154,8 @@ a:focus {
 #page-numbers li.button {
   display: inline-block;
   box-sizing: content-box;
-  width: 11px;
-  line-height: 26px;
+  width: 15px;
+    line-height: 28px;
   background-color: #ea5b0c;
   border-radius: 30px;
   margin-right: 4px;
@@ -244,7 +244,6 @@ img {
 input[type=text],input[type=email],textarea {
   font-family: "Titillium Web",Arial,sans-serif;
   font-size: 12px;
-  border-color: #000;
   border-width: 1px
 }
 
@@ -300,15 +299,109 @@ input[type=password] {
 }
 
 .player-info {
-  border: 3px solid #ea5b0c;
   border-radius: 4px;
 }
 
 .player-name img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 3px solid #fff;
   display: inline-block;
   border-radius: 4px;
   border: 3px solid #ea5b0c;
-  height: 250px;
-  width: 250px;
-  background-color: black;
+    float: left;
+    margin-left: 20px;
+    background-color: #fff;
+}
+ hr, .player-show hr {
+   border: solid #fff;
+ border-width: 0 0;
+ clear: both;
+ height: 0;
+ margin:0;
+
+}
+.player-show .player-info {
+  float: left;
+  text-align: left;
+  margin-left: 20px;
+}
+.player-show .player-info  p{
+  margin:0;
+}
+.player_show_comments .stats{
+  float: left;
+  margin-left: 20px;
+}
+.comments-container {
+  width: 50%;
+  margin: 0 auto;
+}
+.player-show .comments-container .comment-form input {
+  border-bottom-color: #b3b3b3;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #b3b3b3;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #b3b3b3;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: #b3b3b3;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+.comments-container .comment-form  {
+  text-align: left;
+}
+.comments-container  .username-comment {
+  font-family: "Titillium Web",Arial,sans-serif;
+  font-weight: 600;
+
+}
+.comments-container .comment-form input[type=submit] {
+  text-transform: uppercase;
+    padding:10px 5px;
+    background:#ea5b0c;
+    color: #fff;
+    cursor:pointer;
+    -webkit-border-radius: 8px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    font-family: "Titillium Web",Arial,sans-serif;
+    font-weight: 600;
+}
+.comments-container .comment-form input[type=submit]:hover {
+  opacity: 0.5;
+}
+.delete-comment {
+  padding: 10px 5px;
+  background: #ea5b0c;
+  color: #fff;
+  cursor: pointer;
+  -webkit-border-radius: 8px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  font-family: "Titillium Web",Arial,sans-serif;
+  font-weight: 600;
+}
+.delete-comment:hover {
+  opacity: 0.5;
+}
+.comment-vote {
+  margin-top: 9px;
+  border-bottom: 1px solid #ccc;
+}
+.comment-vote .comment p {
+  font-style: italic;
+}
+.count {
+  font-family: "Titillium Web",Arial,sans-serif;
+  font-weight: 600;
+  color: #ea5b0c;
 }

@@ -6,11 +6,11 @@ const CommentTile = (props) => {
   let button = ""
 
   if (props.show) {
-    button = <button type="button" className="button"  onClick = {props.handleDelete}>x</button>
+    button = <button type="button" className="delete-comment"  onClick = {props.handleDelete}>Delete Comment</button>
   }
   return(
     <div className="comment">
-      <span>{props.username} writes:</span>
+      <span className="username-comment">{props.username} writes:</span>
         <p>{props.body}</p>
         {button}
         <VoteTile
@@ -20,6 +20,7 @@ const CommentTile = (props) => {
           commentId={props.commentId}
           userVote={props.userVote}
         />
+        
     </div>
   )
 }
