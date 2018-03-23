@@ -10,7 +10,9 @@ class CommentsContainer extends Component {
       signed_in: false,
       userVotes: [],
       currentPage: 1,
-      commentsPerPage: 4
+      commentsPerPage: 4,
+      if_admin: false,
+      user_id: null
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
@@ -18,6 +20,35 @@ class CommentsContainer extends Component {
     this.addNewComment = this.addNewComment.bind(this);
     this.getCommentsData = this.getCommentsData.bind(this);
     this.vote = this.vote.bind(this);
+    this.handleDeleteComment = this.handleDeleteComment.bind(this);
+  }
+
+  handleDeleteComment(comment_id) {
+   let playerId =this.props.playerId;
+   fetch(`/api/v1/players/${playerId}/comments/${comment_id}`, {
+     method: 'DELETE',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+   .then(response => {
+     if (response.ok) {
+       return response;
+     } else {
+       let errorMessage = `${response.status} (${response.statusText})`,
+       error = new Error(errorMessage);
+       throw(error);
+     }
+   })
+   .then(response => response.json())
+   .then(body => {
+     this.setState({
+       comments: body['comment']['comments'],
+       userVotes: body['comment']['userVotes']
+     })
+   })
   }
 
   handleUpVote(commentId) {
@@ -90,10 +121,13 @@ class CommentsContainer extends Component {
       }
     })
     .then(body => {
+
       this.setState({
         comments: body['comments'],
         signed_in: body['signed_in'],
-        userVotes: body['userVotes']
+        userVotes: body['userVotes'],
+        if_admin: body['if_admin'],
+        user_id: body['user_id']
       })
     })
   }
@@ -124,7 +158,7 @@ class CommentsContainer extends Component {
       updatedComments.unshift(body['comment'])
       this.setState({
         comments: updatedComments,
-        signed_in: body['signed_in'],
+        signed_in: body['signed_in']
       })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -138,15 +172,23 @@ class CommentsContainer extends Component {
 
   render(){
     const { comments, currentPage, commentsPerPage } = this.state;
-
-    // Logic for displaying players
     const indexOfLastComment = currentPage * commentsPerPage;
     const indexOfFirstComment = indexOfLastComment - commentsPerPage;
     const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
-
+    let if_admin = this.state.if_admin
+    let signed_in = this.state.signed_in
+    let user_id = this.state.user_id
     const renderComments = currentComments.map((comment, index) => {
+
       let votecount = 0;
       let userVote = 0;
+      let handleDelete =() =>{ this.handleDeleteComment(comment.comment.id) }
+      let show = false
+      if (if_admin) {
+        show = true
+      } else if (user_id == comment.comment.user_id) {
+        show = true
+      } else {}
       if (comment.votes){
         comment.votes.forEach( vote => {
            votecount += vote.up_or_down
@@ -161,7 +203,8 @@ class CommentsContainer extends Component {
      }
      let handleUpVote = () => { this.handleUpVote(comment.comment.id) }
      let handleDownVote = () => { this.handleDownVote(comment.comment.id) }
-      return(
+
+       return (
         <div className="comment-vote">
           <CommentTile
             id={comment.comment.id}
@@ -174,6 +217,8 @@ class CommentsContainer extends Component {
             voteCount={votecount}
             userVote={userVote}
             commentId={comment.comment.id}
+            handleDelete={handleDelete}
+            show={show}
           />
         </div>
       )
